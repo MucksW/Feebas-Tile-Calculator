@@ -15,6 +15,12 @@
             margin: 20px;
         }
 
+        #disclaimer {
+		  background-color: #ffffcc;
+		  border-left: 6px solid #ffeb3b;
+		  padding: 4px 12px;
+		}
+
         #imageContainer {
             width:641px;
       		height:1553px;
@@ -169,6 +175,11 @@
 			cursor: pointer;
 		}
 
+		input:invalid {
+		  border: 2px solid red;
+		  outline: none;
+		}
+
     </style>
 </head>
 <body>
@@ -180,7 +191,7 @@
         <table class="inputTable"> 
             <form id="calculatorForm">
             	<tr>
-                    <th><label id="game">Version</label></th>
+                    <th><label id="game">Game</label></th>
                     <td><select id="gameOption" name="gameOption">
                             <option value="RS">Ruby/Sapphire</option>
                             <option value="Emerald">Emerald</option>
@@ -189,20 +200,20 @@
                 </tr>
                 <tr>
                     <th><label for="trainerID">Trainer ID</label></th>
-                    <td><input type="number" id="trainerID" name="trainerID" placeholder="00000" required></td>
+                    <td><input type="number" id="trainerID" name="trainerID" placeholder="00000" min="0" max="65535"></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="font-weight:bold;"><label">Dewford Trend</label></td>
                 </tr>
                 <tr>
                     <th><label for="firstWord">First Word</label></th>
-                    <td><input class="selection" list="firstWord" id="firstWordInput" value="HOT" onfocus="this.value=''" onchange="this.blur();">
+                    <td><input class="selection" list="firstWord" id="firstWordInput" value="HOT" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
                     	<datalist id="firstWord"></datalist>
                     </td>
                 </tr>
                 <tr>
                     <th><label for="secondWord">Second Word</label></th>
-                    <td><input class="selection" list="secondWord" id="secondWordInput" value="CHORES" onfocus="this.value=''" onchange="this.blur();">
+                    <td><input class="selection" list="secondWord" id="secondWordInput" value="CHORES" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
                     	<datalist id="secondWord"></datalist>
                     </td>
                 </tr>
@@ -566,10 +577,40 @@
         	}
         }
 
+        function validateInput() {
+            var firstWord = document.getElementById("firstWordInput").value.toUpperCase();
+            var secondWord = document.getElementById("secondWordInput").value.toUpperCase();
+            var tid = document.getElementById("trainerID").value;
+
+            var valid = true;
+
+            if(tid < 0 || tid > 65535){
+            	valid = false;
+            }
+
+            if (!conditions.includes(firstWord)) {
+            	document.getElementById("firstWordInput").setCustomValidity("invalid");
+                valid = false;
+            }
+            else{
+            	document.getElementById("firstWordInput").setCustomValidity("");
+            }
+
+            if(!lifestyle.concat(hobbies).includes(secondWord)){
+            	document.getElementById("secondWordInput").setCustomValidity("invalid");
+            	valid = false;
+            }
+            else{
+            	document.getElementById("secondWordInput").setCustomValidity("");
+            }
+
+            return valid;
+
+        }
+
         function calculate() {
 
-        	var inputValid = validateInput();
-        	if(!inputValid){
+        	if(!validateInput()){
         		return;
         	}
 
@@ -623,18 +664,6 @@
         	if(generated){
         		calculate();
         	}
-        }
-
-        function validateInput() {
-            var firstWord = document.getElementById("firstWordInput").value.toUpperCase();
-            var secondWord = document.getElementById("secondWordInput").value.toUpperCase();
-
-            if (!conditions.includes(firstWord) || !lifestyle.concat(hobbies).includes(secondWord)) {
-                return false;
-            }
-
-            return true;
-
         }
 
         window.onscroll = function () {
