@@ -21,7 +21,7 @@
       		margin-bottom: 20px;
         }
 
-        #mainImage {
+        #routeImage {
             position: absolute;
             display: block;
             width:641px;
@@ -103,7 +103,7 @@
             margin: 0;
         }
 
-        input[type="text"], input[type="number"], select, input[type="checkbox"] {
+        input[type="text"], input[type="number"], select, .selection, input[type="checkbox"] {
             width: 100%;
             padding: 8px;
             border: 1px solid #ccc;
@@ -196,11 +196,15 @@
                 </tr>
                 <tr>
                     <th><label for="firstWord">First Word</label></th>
-                    <td><select id="firstWord"></select></td>
+                    <td><input class="selection" list="firstWord" id="firstWordInput" value="HOT" onfocus="this.value=''" onchange="this.blur();">
+                    	<datalist id="firstWord"></datalist>
+                    </td>
                 </tr>
                 <tr>
-                    <th><label for="secondWord">Second Word</label></th>
-                    <td><select id="secondWord"></select></td>
+                    <th><label for="secondWord">First Word</label></th>
+                    <td><input class="selection" list="secondWord" id="secondWordInput" value="CHORES" onfocus="this.value=''" onchange="this.blur();">
+                    	<datalist id="secondWord"></datalist>
+                    </td>
                 </tr>
             </form>
         </table>
@@ -229,7 +233,7 @@
     </div>
     <div class="col-md-6" id="imageContainer">
         <p>Image credit: <a href="https://github.com/Bl4ckSh4rk/PKHeXFeebasLocatorPlugin/">Bl4ckSh4rk</a></p>
-        <img src="route119.png" id="mainImage">
+        <img src="route119.png" id="routeImage">
         <canvas id="overlayCanvas" width="641" height="1553"></canvas>
     </div>
 
@@ -446,17 +450,20 @@
 		const canvas = document.getElementById("overlayCanvas");
         const context = canvas.getContext("2d");
 
-        var options="";
-		conditions.map((option)=>{
-			options+=`<option value="${option}" id="${option}"">${option}</option>`
-		})
-		document.getElementById("firstWord").innerHTML = options;
+		var firstWordList = document.getElementById('firstWord');
+		var secondWordList = document.getElementById('secondWord');
 
-		var options="";
-		lifestyle.concat(hobbies).map((option)=>{
-			options+=`<option value="${option}" id="${option}"">${option}</option>`
-		})
-		document.getElementById("secondWord").innerHTML = options;
+		conditions.forEach(function(item){
+		   var option = document.createElement('option');
+		   option.value = item;
+		   firstWordList.appendChild(option);
+		});
+
+		lifestyle.concat(hobbies).forEach(function(item){
+		   var option = document.createElement('option');
+		   option.value = item;
+		   secondWordList.appendChild(option);
+		});
 
         function colorPixels(tileCoords, color) {
             context.fillStyle = color;//"rgba(255, 0, 0, 1)";
@@ -560,6 +567,12 @@
         }
 
         function calculate() {
+
+        	var inputValid = validateInput();
+        	if(!inputValid){
+        		return;
+        	}
+
         	const context = canvas.getContext('2d');
 			context.clearRect(0, 0, canvas.width, canvas.height);
             var is_emerald = document.getElementById("gameOption").value;
@@ -568,8 +581,8 @@
 
 			var tid = document.getElementById("trainerID").value;
 			var seed = is_emerald ? tid : 0x5a0;
-			var word1 = document.getElementById("firstWord").value;
-			var word2 = document.getElementById("secondWord").value;
+			var word1 = document.getElementById("firstWordInput").value.toUpperCase();
+			var word2 = document.getElementById("secondWordInput").value.toUpperCase();
 
 			var showResult0 = +document.getElementById("result0Checkbox").checked;
 			var showResult1 = +document.getElementById("result1Checkbox").checked;
@@ -610,6 +623,18 @@
         	if(generated){
         		calculate();
         	}
+        }
+
+        function validateInput() {
+            var firstWord = document.getElementById("firstWordInput").value.toUpperCase();
+            var secondWord = document.getElementById("secondWordInput").value.toUpperCase();
+
+            if (!conditions.includes(firstWord) || !lifestyle.concat(hobbies).includes(secondWord)) {
+                return false;
+            }
+
+            return true;
+
         }
 
         window.onscroll = function () {
