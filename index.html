@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Feebas Tile Calculator</title>
 
@@ -176,9 +177,41 @@
 		}
 
 		input:invalid {
-		  border: 2px solid red;
-		  outline: none;
+			border: 2px solid red;
+			outline: none;
 		}
+
+		.info {
+			position:relative;
+			cursor: help;
+			color: blue;
+	    }
+
+	    .info span {
+			display:none;
+			-moz-border-radius:6px;
+			-webkit-border-radius:6px;
+			border-radius:6px;
+			color:black;
+			background:white;
+
+	    }
+
+	    .info span img {
+			float:left;
+	    }
+
+	    .info:hover span, .info:active span {
+			display : block;
+			position : absolute;
+			top : 0;
+			left : 0;
+			z-index : 1;
+			border : 1px solid black;
+			margin-top : 12px;
+			margin-left : 12px;
+			padding : 4px;
+	    }
 
     </style>
 </head>
@@ -187,7 +220,13 @@
   <div class="row">
 	<div class="col-md-6">
         <h1>Feebas Tile Calculator</h1>
-        <p id="disclaimer">This calculator requires that the save file was created with an already dead battery and that the trend in Dewford City was  never changed.</p>
+        <p id="disclaimer">
+        <span>This calculator requires that the save file was created with an already dead battery and that the trend in Dewford City was  never changed.</span>
+        <a class="info" >
+			<i class="fa" style="color:#3F00FF">&#xf059;</i>
+			<span><img src="help.png"></span>
+		</a>
+        </p>
         <table class="inputTable"> 
             <form id="calculatorForm">
             	<tr>
@@ -223,19 +262,19 @@
 
         <table  id="resultContainer">
           <tr>
-          	<th><input type="checkbox" id="result0Checkbox" checked="true" onclick="calculate_if_generated()"></th>
+          	<th><input type="checkbox" id="result0Checkbox" checked onclick="calculate_if_generated()"></th>
             <th width="75%"> Feebas Random Value</div></th>
             <th><div id="square0"><input type="color" class="colorPicker" value="#E34234" id="colorPicker0"/></div></th>
             <td id="result0">0000</th>
           </tr>
           <tr>
-          	<th><input type="checkbox" id="result1Checkbox" checked="true" onclick="calculate_if_generated()"></th>
+          	<th><input type="checkbox" id="result1Checkbox" onclick="calculate_if_generated()"></th>
             <th>First Alternative</div></th>
             <th><div id="square1"><input type="color" class="colorPicker" value="#FFD700" id="colorPicker1"/></div></th>
             <td id="result1">0000</th>
           </tr>
           <tr>
-          	<th><input type="checkbox" id="result2Checkbox" checked="true" onclick="calculate_if_generated()"></th>
+          	<th><input type="checkbox" id="result2Checkbox" onclick="calculate_if_generated()"></th>
             <th>Second Alternative</div></th>
             <th><div id="square2"><input type="color" class="colorPicker" value="#0BDA51" id="colorPicker2"/></div></th>
             <td id="result2">0000</th>
@@ -416,19 +455,39 @@
 
 			seed = is_emerald ? skipImpossibleAdvances(seed) : advanceToTID(seed, tid);
 
-			while(1){ // Loop that finds three consecutive RNG calls that match the given words
-			  seed = next(seed);
-			  if((seed >> BigInt(16)) % BigInt(69) == first_word_index){ // Found match for first word index
-			      
-			      if(((next(seed) >> BigInt(16)) & BigInt(1)) == second_word_from_group_lifestyle){ // Found match for group of second word
-			          var elements_in_second_group = second_word_from_group_lifestyle ? 45 : 54;
+			feebasRands = [];
 
-			          if((next(seed,2) >> BigInt(16)) % BigInt(elements_in_second_group) == second_word_index){ // Found match for second word index
-			              return [next(seed,7) >> BigInt(16), next(seed,6) >> BigInt(16), next(seed,8) >> BigInt(16)]; // Return possible Feebas Random Values
+			while(feebasRands.length < 3){ // Loop that finds three consecutive RNG calls that match the given words
+				seed = next(seed);
+				if((seed >> BigInt(16)) % BigInt(69) == first_word_index){ // Found match for first word index
+			      
+					if(((next(seed) >> BigInt(16)) & BigInt(1)) == second_word_from_group_lifestyle){ // Found match for group of second word
+						var elements_in_second_group = second_word_from_group_lifestyle ? 45 : 54;
+
+						if((next(seed,2) >> BigInt(16)) % BigInt(elements_in_second_group) == second_word_index){ // Found match for second word index
+							var numAdvances;
+							if((next(seed,4) >> BigInt(16)) % BigInt(98) > 50){
+
+								// Additional Advances for trendiness values
+								if((next(seed,5) >> BigInt(16)) % BigInt(98) > 80){
+									numAdvances = 8;
+								}
+								else{
+									numAdvances = 7;
+								}
+							}
+							else{
+								numAdvances = 6;
+							}
+							
+							feebasRands.push(next(seed,numAdvances) >> BigInt(16));
+
 			          }
 			      }
 			  }
 			}
+
+			return feebasRands;
 		}
 
 
