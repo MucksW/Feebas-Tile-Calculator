@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.5/css/flag-icons.min.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>Feebas Tile Calculator</title>
 
     <style>
@@ -96,6 +99,7 @@
             padding: 10px;
             border: 1px solid #ddd;
             text-align: center;
+            position: relative;
         }
 
         th {
@@ -214,6 +218,24 @@
 			padding : 4px;
 	    }
 
+	    .dropdown-menu{
+	    	min-width: 2px; 
+	    }
+
+	    td .dropdown {
+		    position: absolute;
+			right: 7px;
+			top: 7px;
+		}
+
+		td .dropdown .dropdown-toggle{
+			padding: 7px;
+			background: rgba(126,188,128,1);
+		}
+
+		td .dropdown .dropdown-menu{
+			background: rgba(126,188,128,0.7);
+		}
     </style>
 </head>
 <body>
@@ -228,10 +250,12 @@
 			<span><img src="help.png"></span>
 		</a>
         </p>
+
+
         <table class="inputTable"> 
             <form id="calculatorForm">
             	<tr>
-                    <th><label id="game">Game</label></th>
+                    <th><label for="gameOption" id="game">Game</label></th>
                     <td><select id="gameOption" name="gameOption">
                             <option value="RS">Ruby/Sapphire</option>
                             <option value="Emerald">Emerald</option>
@@ -243,17 +267,31 @@
                     <td><input type="number" id="trainerID" name="trainerID" placeholder="00000" min="0" max="65535"></td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="font-weight:bold;"><label">Dewford Trend</label></td>
+                    <td colspan="2" ><label style="font-weight:bold;">Dewford Trend</label>
+				        <div class="dropdown">  
+				            <button type="button" class="dropdown-toggle" data-toggle="dropdown">  
+				                <a id="defaultIcon" class="flag-icon flag-icon-gb"></a>
+				            </button>  
+				            <div class="dropdown-menu">  
+				                <a id="gb" class="dropdown-item"><i class="flag-icon flag-icon-gb"></i></a>
+				                <a id="jp" class="dropdown-item"><i class="flag-icon flag-icon-jp"></i></a>
+				                <a id="fr" class="dropdown-item"><i class="flag-icon flag-icon-fr"></i></a>
+				                <a id="de" class="dropdown-item"><i class="flag-icon flag-icon-de"></i></a>
+				                <a id="it" class="dropdown-item"><i class="flag-icon flag-icon-it"></i></a>
+				                <a id="es" class="dropdown-item"><i class="flag-icon flag-icon-es"></i></a>
+				            </div>  
+				        </div>  
+				    </td>
                 </tr>
                 <tr>
-                    <th><label for="firstWord">First Word</label></th>
-                    <td><input class="selection" list="firstWord" id="firstWordInput" value="HOT" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
+                    <th><label for="firstWordInput">First Word</label></th>
+                    <td><input class="selection" list="firstWord" id="firstWordInput" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
                     	<datalist id="firstWord"></datalist>
                     </td>
                 </tr>
                 <tr>
-                    <th><label for="secondWord">Second Word</label></th>
-                    <td><input class="selection" list="secondWord" id="secondWordInput" value="CHORES" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
+                    <th><label for="secondWordInput">Second Word</label></th>
+                    <td><input class="selection" list="secondWord" id="secondWordInput" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
                     	<datalist id="secondWord"></datalist>
                     </td>
                 </tr>
@@ -356,13 +394,120 @@
                                 [305, 1489], [129, 1505], [145, 1505], [161, 1505], [177, 1505], [193, 1505], [113, 1521], [129, 1521]];
 
         // 69 elements
-		var conditions = ["HOT", "EXISTS", "EXCESS", "APPROVED", "HAS", "GOOD", "LESS", "MOMENTUM", "GOING", "WEIRD", "BUSY", "TOGETHER", "FULL", "ABSENT", "BEING", "NEED", "TASTY", "SKILLED", "NOISY", "BIG", "LATE", "CLOSE", "DOCILE", "AMUSING", "ENTERTAINING", "PERFECTION", "PRETTY", "HEALTHY", "EXCELLENT", "UPSIDE DOWN", "COLD", "REFRESHING", "UNAVOIDABLE", "MUCH", "OVERWHELMING", "FABULOUS", "ELSE", "EXPENSIVE", "CORRECT", "IMPOSSIBLE", "SMALL", "DIFFERENT", "TIRED", "SKILL", "TOP", "NON STOP", "PREPOSTEROUS", "NONE", "NOTHING", "NATURAL", "BECOMES", "LUKEWARM", "FAST", "LOW", "AWFUL", "ALONE", "BORED", "SECRET", "MYSTERY", "LACKS", "BEST", "LOUSY", "MISTAKE", "KIND", "WELL", "WEAKENED", "SIMPLE", "SEEMS", "BADLY"];
+		var conditions_en = ["HOT", "EXISTS", "EXCESS", "APPROVED", "HAS", "GOOD", "LESS", "MOMENTUM", "GOING", "WEIRD", "BUSY", "TOGETHER", "FULL", "ABSENT", "BEING", "NEED", "TASTY", "SKILLED", "NOISY", "BIG", "LATE", "CLOSE", "DOCILE", "AMUSING", "ENTERTAINING", "PERFECTION", "PRETTY", "HEALTHY", "EXCELLENT", "UPSIDE DOWN", "COLD", "REFRESHING", "UNAVOIDABLE", "MUCH", "OVERWHELMING", "FABULOUS", "ELSE", "EXPENSIVE", "CORRECT", "IMPOSSIBLE", "SMALL", "DIFFERENT", "TIRED", "SKILL", "TOP", "NON STOP", "PREPOSTEROUS", "NONE", "NOTHING", "NATURAL", "BECOMES", "LUKEWARM", "FAST", "LOW", "AWFUL", "ALONE", "BORED", "SECRET", "MYSTERY", "LACKS", "BEST", "LOUSY", "MISTAKE", "KIND", "WELL", "WEAKENED", "SIMPLE", "SEEMS", "BADLY"];
+
+		var conditions_jp = ["あつい", "あった", "あまり", "あり", "ある", "いい", "いか", "いきおい", "いける", "いじょう", "いそがしい", "いっしょに", "いっぱい", "いない", "いや", "いる", "うまい", "うまく", "うるさい", "おおきい", "おくれ", "おしい", "おとなしい", "おもしろい", "おもしろく", "かんぺき", "けっこう", "げんき", "さいこう", "さかさま", "さむい", "さわやか", "しかたない", "すごい", "すごすぎ", "すてき", "たいした", "たかい", "ただしい", "だめ", "ちいさい", "ちがう", "つかれ", "とくい", "トップ", "とまらない", "とんでもない", "ない", "なかった", "なし", "なって", "ぬるい", "はやい", "ひくい", "ひどい", "ひとりで", "ひま", "ひみつ", "ふしぎ", "ふそく", "ベスト", "へた", "まちがって", "やさしい", "よく", "よわって", "らく", "らしい", "わるい"];
+
+		var conditions_fr = ["CHAUD", "EXISTE", "EXCES", "APPROUVE", "LENT", "BON", "LENTEUR", "VITESSE", "FACILITE", "BIZARRE", "OCCUPE", "ENSEMBLE", "PLEIN", "ABSENT", "ETANT", "J'AI BESOIN", "DELICIEUX", "DOUE", "BRUYANT", "ENORME", "TARD", "PROCHE", "DOCILE", "AMUSANT", "DISTRAYANT", "PERFECTION", "JOLI", "EN FORME", "REMARQUABLE", "BEBETE", "FROID", "FRAIS", "INEVITABLE", "IGNORANT", "IRRESISTIBLE", "FABULEUX", "NUNUCHE", "CHER", "CORRECTEMENT", "IMPOSSIBLE", "PETIT", "DIFFERENT", "FATIGUE", "HABILETE", "MAXIMUM", "NON-STOP", "RIDICULE", "AUCUN", "RIEN", "NATUREL", "DEVIENT", "TIEDE", "RAPIDE", "BAS", "TERRIBLE", "SEUL", "JE M'ENNUIE", "SECRET", "MYSTERE", "IL MANQUE", "MEILLEUR", "MINABLE", "ERREUR", "AGREABLE", "PIRE", "AFFAIBLI", "SIMPLE", "ON DIRAIT", "GRAVEMENT"];
+
+		var conditions_de = ["HEISS", "EXISTIERT", "ÜBERMÄSSIG", "GENEHMIGT", "HAT", "FEIN", "WENIGER", "SCHWUNG", "GEHEN", "VERRÜCKT", "BESCHÄFTIGT", "ZUSAMMEN", "VOLL", "ABWESEND", "SEINE", "BRAUCHE", "LECKER", "GESCHICKT", "LAUT", "GROSS", "SPÄT", "NAHE BEI", "SANFTMÜTIG", "AMÜSANT", "UNTERHALTSAM", "PERFEKTION", "HÜBSCH", "GESUND", "EXZELLENT", "UMGEDREHT", "KALT", "ERFRISCHEND", "UNVERMEIDBAR", "VIELE", "MITREISSEND", "FABELHAFT", "ANDERES", "TEUER", "RICHTIG", "UNMÖGLICH", "KLEIN", "VERSCHIEDENE", "MÜDE", "GESCHICK", "TOP", "NONSTOP", "ABSURD", "KEIN", "NICHTS", "NATÜRLICH", "WIRD", "LAUWARM", "SCHNELL", "NIEDRIG", "SCHLIMM", "ALLEINE", "GELANGWEILT", "GEHEIMNIS", "GEHEIM", "FEHLT", "BESTES", "LAUSIG", "FEHLER", "HÖFLICH", "SCHLECHT", "GESCHWÄCHT", "EINFACH", "SCHEINBAR", "MIES"];
+
+		var conditions_it = ["ALTRUISMO", "VIRTÙ", "BUONE", "BUONI", "BUONA", "BUONO", "È BRAVO", "DI SLANCIO", "È BRAVA", "SONO BRAVI", "CON CORAGGIO", "VIVACITÀ", "CREDO IN TE", "SONO GRANDE", "BONTÀ", "CORTESIA", "SAPIDA", "TALENTO", "BON TON", "SEI GRANDE", "EFFICACE", "EFFICACI", "AFFABILE", "DIVERTENTI", "DIVERTENTE", "PERFEZIONE", "AFFABILI", "TI STUPIRÀ", "ECCELLENTE", "ECCELLENTI", "TRAVOLGENTI", "TROPPO FORTE", "NATURALI", "TI AMMIRO", "TRAVOLGENTE", "UNA FAVOLA", "AMMIRAZIONE", "FENOMENALE", "FENOMENALI", "CHE FENOMENO", "FENOMENO", "SEI UN MITO", "SONO UN MITO", "ABILITÀ", "SEI AL TOP", "SONO AL TOP", "È IL MASSIMO", "VI AMMIRO", "SONO GRANDI", "NATURALE", "SONO FORTI", "CHI TI BATTE", "MI STUPISCI", "TI STUPIRÒ", "LAVORA SODO", "IN FORMA", "ECCEZIONALE", "ECCEZIONALI", "SEGRETO", "SIMPATIA", "SIETE GRANDI", "SONO MITICI", "SIAMO MITICI", "IMBATTIBILE", "IMBATTIBILI", "CREDO IN VOI", "SEMPLICE", "SEMPLICI", "VALORE"];
+
+		var conditions_es = ["BONDADOSO", "BONDADOSA", "LEAL", "FUERTE", "MIEDO", "ÚNICO", "ÚNICA", "RAPIDÍSIMA", "RAPIDÍSIMO", "FURIA", "CERTERO", "CERTERA", "FUERTES", "SAGAZ", "GENIAL", "CORDIAL", "MAÑOSO", "MAÑOSA", "ASTUTO", "ASTUTA", "CARISMÁTICOS", "PACIENTE", "DÓCIL", "GRACIOSO", "GRACIOSA", "CONSTANTE", "SERENO", "SERENA", "RESPETUOSO", "RESPETUOSA", "SEGURO", "SEGURA", "TENAZ", "AMABLE", "PRUDENTE", "RESPONSABLE", "DISCRETO", "DISCRETA", "CORRECTA", "CORRECTO", "MODERADO", "MODERADA", "RESISTENTE", "RÁPIDO", "RÁPIDA", "SENSIBLE", "FOGOSA", "FOGOSO", "SILENCIOSO", "SILENCIOSA", "CAPAZ", "REFLEXIVO", "REFLEXIVA", "ENÉRGICO", "ENÉRGICA", "SENSATO", "SENSATA", "HUMILDE", "MISTERIOSO", "ENIGMÁTICO", "ENIGMÁTICA", "VELOZ", "ÁGIL", "EVASIVO", "EVASIVA", "SENCILLO", "SENCILLA", "DIVERTIDA", "DIVERTIDO"];
 
 		// 45 elements
-		var lifestyle = ["CHORES", "HOME", "MONEY", "ALLOWANCE", "BATH", "CONVERSATION", "SCHOOL", "COMMEMORATE", "HABIT", "GROUP", "WORD", "STORE", "SERVICE", "WORK", "SYSTEM", "TRAIN", "CLASS", "LESSONS", "INFORMATION", "LIVING", "TEACHER", "TOURNAMENT", "LETTER", "EVENT", "DIGITAL", "TEST", "DEPT STORE", "TELEVISION", "PHONE", "ITEM", "NAME", "NEWS", "POPULAR", "PARTY", "STUDY", "MACHINE", "MAIL", "MESSAGE", "PROMISE", "DREAM", "KINDERGARTEN", "LIFE", "RADIO", "RENTAL", "WORLD"];
+		var lifestyle_en = ["CHORES", "HOME", "MONEY", "ALLOWANCE", "BATH", "CONVERSATION", "SCHOOL", "COMMEMORATE", "HABIT", "GROUP", "WORD", "STORE", "SERVICE", "WORK", "SYSTEM", "TRAIN", "CLASS", "LESSONS", "INFORMATION", "LIVING", "TEACHER", "TOURNAMENT", "LETTER", "EVENT", "DIGITAL", "TEST", "DEPT STORE", "TELEVISION", "PHONE", "ITEM", "NAME", "NEWS", "POPULAR", "PARTY", "STUDY", "MACHINE", "MAIL", "MESSAGE", "PROMISE", "DREAM", "KINDERGARTEN", "LIFE", "RADIO", "RENTAL", "WORLD"];
+
+		var lifestyle_jp = ["アルバイト", "うち", "おかね", "おこづかい", "おふろ", "かいわ", "がっこう", "きねん", "くせ", "グループ", "ことば", "コンビニ", "サービス", "しごと", "システム", "しゅぎょう", "じゅぎょう", "じゅく", "じょうほう", "せいかつ", "せんせい", "たいかい", "てがみ", "できごと", "デジタル", "テスト", "デパート", "テレビ", "でんわ", "どうぐ", "なまえ", "ニュース", "にんき", "パーティー", "べんきょう", "マシン", "メール", "メッセージ", "やくそく", "ゆめ", "ようちえん", "ライフ", "ラジオ", "レンタル", "ワールド"];
+
+		var lifestyle_fr = ["ROUTINE", "MAISON", "ARGENT", "TRANSPORTS", "BAIN", "CONVERSATION", "ECOLE", "ANNIVERSAIRE", "HABITUDES", "GROUPE", "MOT", "MAGASIN", "SERVICE", "TRAVAIL", "SYSTEME", "TRAIN", "CLASSE", "DEVOIRS", "INFORMATIONS", "QUOTIDIEN", "PROFESSEUR", "TOURNOI", "LETTRE", "EVENEMENT", "NUMERIQUE", "CONTROLE", "EPICERIE", "TELEVISION", "TELEPHONE", "OBJET", "NOM", "NOUVELLES", "CELEBRE", "FETE", "ETUDIER", "ORDINATEUR", "COURRIER", "MESSAGE", "PROMESSE", "REVE", "MATERNELLE", "VIE", "RADIO", "LOYER", "MONDE"];
+
+		var lifestyle_de = ["PFLICHTEN", "HEIM", "GELD", "TASCHENGELD", "BAD", "GESPRÄCH", "SCHULE", "GEDENKEN", "GEWOHNHEIT", "GRUPPE", "WORT", "LAGER", "SERVICE", "ARBEIT", "SYSTEM", "TRAINIEREN", "LEKTION", "UNTERRICHT", "INFORMATION", "LEBENDIG", "LEHRER", "TURNIER", "BRIEF", "GESCHEHEN", "DIGITALES", "TEST", "KAUFHAUS", "FERNSEHER", "TELEFON", "ITEM", "NAME", "NEUIGKEITEN", "POPULÄR", "PARTY", "LERNEN", "MASCHINE", "POST", "MITTEILUNG", "VERSPRECHEN", "TRAUM", "KINDERGARTEN", "LEBEN", "RADIO", "MIETE", "WELT"];
+
+		var lifestyle_it = ["COMPITI", "CASA", "SOLDI", "PAGHETTA", "BAGNO", "DIALOGO", "SCUOLA", "CELEBRAZIONE", "ABITUDINE", "GRUPPO", "PAROLA", "MAESTRO", "LAVAGNA", "LAVORO", "SISTEMA", "TRENO", "AULA", "LEZIONI", "INFORMAZIONI", "VIVA LA VITA", "INSEGNANTE", "TORNEO", "LETTERA", "EVENTO", "TECNOLOGIA", "PALLONE", "NEGOZIO", "TELEVISIONE", "TELEFONO", "STRUMENTO", "NOME", "NOTIZIE", "MAESTRA", "FESTA", "STUDIO", "MACCHINA", "MESSAGGIO", "POSTA", "PROMESSA", "SOGNO", "ASILO", "VITA", "RADIO", "E-MAIL", "MONDO"];
+
+		var lifestyle_es = ["RUTINA", "HOGAR", "DINERO", "PAGA SEMANAL", "BAÑO", "CHARLAR", "COLEGIO", "CUMPLEAÑOS", "HÁBITOS", "AMIGOS", "PRENSA", "MERCADO", "TRÁFICO", "TRABAJO", "AUTOBÚS", "METRO", "CLASES", "DEBERES", "DESAYUNAR", "MERENDAR", "PROFESOR", "CENAR", "CORREO", "EVENTO", "NOTAS", "EXÁMENES", "TIENDAS", "TELEVISIÓN", "TELÉFONO", "RECREO", "DUCHARSE", "PAN", "CINE", "TEATRO", "ESTUDIOS", "COCHES", "PELUQUERÍA", "MENSAJES", "PARQUE", "AULA", "PISCINA", "PLAYA", "RADIO", "REÍR", "LLORAR"];
 
 		// 54 elements
-		var hobbies = ["IDOL", "ANIME", "SONG", "MOVIE", "SWEETS", "CHAT", "CHILD S PLAY", "TOYS", "MUSIC", "CARDS", "SHOPPING", "CAMERA", "VIEWING", "SPECTATOR", "GOURMET", "GAME", "RPG", "COLLECTION", "COMPLETE", "MAGAZINE", "WALK", "BIKE", "HOBBY", "SPORTS", "SOFTWARE", "SONGS", "DIET", "TREASURE", "TRAVEL", "DANCE", "CHANNEL", "MAKING", "FISHING", "DATE", "DESIGN", "LOCOMOTIVE", "PLUSH DOLL", "PC", "FLOWERS", "HERO", "NAP", "HEROINE", "FASHION", "ADVENTURE", "BOARD", "BALL", "BOOK", "FESTIVAL", "COMICS", "HOLIDAY", "PLANS", "TRENDY", "VACATION", "LOOK"];
+		var hobbies_en = ["IDOL", "ANIME", "SONG", "MOVIE", "SWEETS", "CHAT", "CHILD S PLAY", "TOYS", "MUSIC", "CARDS", "SHOPPING", "CAMERA", "VIEWING", "SPECTATOR", "GOURMET", "GAME", "RPG", "COLLECTION", "COMPLETE", "MAGAZINE", "WALK", "BIKE", "HOBBY", "SPORTS", "SOFTWARE", "SONGS", "DIET", "TREASURE", "TRAVEL", "DANCE", "CHANNEL", "MAKING", "FISHING", "DATE", "DESIGN", "LOCOMOTIVE", "PLUSH DOLL", "PC", "FLOWERS", "HERO", "NAP", "HEROINE", "FASHION", "ADVENTURE", "BOARD", "BALL", "BOOK", "FESTIVAL", "COMICS", "HOLIDAY", "PLANS", "TRENDY", "VACATION", "LOOK"];
+
+		var hobbies_jp = ["アイドル", "アニメ", "うた", "えいが", "おかし", "おしゃべり", "おままごと", "おもちゃ", "おんがく", "カード", "かいもの", "カメラ", "かんしょう", "かんせん", "グルメ", "ゲーム", "ごっこ", "コレクション", "コンプリート", "ざっし", "さんぽ", "じてんしゃ", "しゅみ", "スポーツ", "ソフト", "ソング", "ダイエット", "たからもの", "たび", "ダンス", "チャンネル", "つくり", "つり", "デート", "デザイン", "でんしゃ", "ぬいぐるみ", "パソコン", "はな", "ヒーロー", "ひるね", "ヒロイン", "ファッション", "ぼうけん", "ボード", "ボール", "ほん", "まつり", "まんが", "やすみ", "よてい", "りゅうこう", "りょこう", "ルック"];
+
+		var hobbies_fr = ["STAR", "DESSIN ANIME", "CHANSON", "CINEMA", "BONBONS", "DISCUTER", "JEU D'ENFANT", "JOUETS", "MUSIQUE", "CARTES", "SHOPPING", "PHOTOGRAPHIE", "FOYER", "THEATRE", "CUISINE", "JEUX", "JEUX DE ROLE", "COLLECTION", "JEUX VIDEO", "MAGAZINES", "COURSE", "VELO", "HOBBY", "SPORT", "LOGICIELS", "CHANTER", "DIETETIQUE", "TRESORS", "VOYAGES", "DANSE", "CHAINE", "BRICOLAGE", "PECHE", "RENDEZ-VOUS", "DESSIN", "PETIT TRAIN", "NOUNOURS", "INFORMATIQUE", "JARDINAGE", "HEROS", "SIESTE", "HEROINE", "MODE", "AVENTURE", "BATEAU", "FOOTBALL", "LIVRE", "FESTIVALS", "BD", "VACANCES", "LECTURE", "A LA MODE", "TOURISME", "COCOONING"];
+
+		var hobbies_de = ["IDOL", "ANIME", "SONG", "FILM", "NASCHEN", "PLAUDERN", "KINDERSPIEL", "SPIELZEUG", "MUSIK", "KARTENSPIELE", "EINKAUFEN", "FOTOS", "BESICHTIGUNG", "ZUSCHAUER", "GOURMET", "SPIEL", "RPG", "SAMMLUNG", "KOMPLETT", "MAGAZIN", "SPAZIEREN", "FAHRRAD", "HOBBY", "SPORT", "SOFTWARE", "SONGS", "NAHRUNG", "KOSTBARKEIT", "REISEN", "TANZEN", "WASSERSPORT", "HERSTELLUNG", "ANGELN", "VERABREDUNG", "DESIGN", "LOKOMOTIVEN", "PLÜSCHPUPPEN", "PC", "BLUMEN", "HELD", "NICKERCHEN", "HELDIN", "MODE", "ABENTEUER", "BRETTSPIELE", "BALL", "BÜCHER", "FESTIVALS", "COMICS", "FERIEN", "ETWAS PLANEN", "SCHICKIMICKI", "URLAUB", "AUSSEHEN"];
+
+		var hobbies_it = ["IDOLO", "ROCK", "SCIARE", "CINEMA", "DOLCI", "CHAT", "GIOCHI", "GIOCATTOLI", "MUSICA", "FIGURINE", "SHOPPING", "FOTOGRAFIA", "ESCURSIONE", "TEATRO", "CUCINARE", "GIOCARE", "INFORMATICA", "COLLEZIONARE", "SCAMBIARE", "MANGIARE", "CAMMINARE", "BICI", "HOBBY", "SPORT", "SOFTWARE", "CANZONE", "CANTARE", "FRANCOBOLLI", "VIAGGIARE", "BALLARE", "LA TV", "VEDERE", "PESCARE", "USCIRE", "DISEGNARE", "TRENINI", "PELUCHE", "PC", "FIORI", "CAMPIONE", "DORMIRE", "CAMPIONESSA", "MODA", "AVVENTURA", "DA TAVOLO", "CALCIO", "LEGGERE", "CORRERE", "FUMETTI", "OZIARE", "MODELLISMO", "GIOCO", "VACANZE", "SCRIVERE"];
+
+		var hobbies_es = ["ÍDOLO", "DORMIR", "CANTAR", "PELÍCULAS", "GOLOSINAS", "CHATEAR", "JUEGO", "JUGUETES", "MÚSICA", "CROMOS", "COMPRAS", "FOTOGRAFÍA", "EXPOSICIONES", "ESPECTÁCULOS", "COMER BIEN", "CANICAS", "VIDEOJUEGOS", "COLECCIONES", "MAGIA", "REVISTAS", "PASEAR", "CICLISMO", "ESTUDIAR", "DEPORTES", "INTERNET", "VÍDEOS", "COCINAR", "DARDOS", "VIAJAR", "BAILAR", "EXCURSIÓN", "ARTESANÍA", "PESCAR", "CITAS", "DISEÑAR", "TRENES", "PELUCHE", "PC", "FLORES", "HÉROES", "SIESTA", "CAMPAMENTO", "MODA", "AVENTURA", "JUEGOS MESA", "PELOTA", "LIBROS", "DISFRACES", "CÓMICS", "FIESTA", "MAQUETAS", "REFRANES", "VACACIONES", "DANZA"];
+
+		var lang = "gb";
+
+		var conditions;
+		var lifestyle;
+		var hobbies;
+
+		var firstWordList = document.getElementById('firstWord');
+		var secondWordList = document.getElementById('secondWord');
+
+		function loadWords(lang){
+
+			switch(lang){
+				case 'gb':
+					document.getElementById("firstWordInput").value = "HOT";
+					document.getElementById("secondWordInput").value = "CHORES";
+					conditions = conditions_en;
+					lifestyle = lifestyle_en;
+					hobbies = hobbies_en;
+					break;
+				case 'jp':
+					document.getElementById("firstWordInput").value = "あつい";
+					document.getElementById("secondWordInput").value = "アルバイト";
+					conditions = conditions_jp;
+					lifestyle = lifestyle_jp;
+					hobbies = hobbies_jp;
+					break;
+				case 'fr':
+					document.getElementById("firstWordInput").value = "CHAUD";
+					document.getElementById("secondWordInput").value = "ROUTINE";
+					conditions = conditions_fr;
+					lifestyle = lifestyle_fr;
+					hobbies = hobbies_fr;
+					break;
+				case 'de':
+					document.getElementById("firstWordInput").value = "HEISS";
+					document.getElementById("secondWordInput").value = "PFLICHTEN";
+					conditions = conditions_de;
+					lifestyle = lifestyle_de;
+					hobbies = hobbies_de;
+					break;
+				case 'it':
+					document.getElementById("firstWordInput").value = "ALTRUISMO";
+					document.getElementById("secondWordInput").value = "COMPITI";
+					conditions = conditions_it;
+					lifestyle = lifestyle_it;
+					hobbies = hobbies_it;
+					break;
+				case 'es':
+					document.getElementById("firstWordInput").value = "BONDADOSO";
+					document.getElementById("secondWordInput").value = "RUTINA";
+					conditions = conditions_es;
+					lifestyle = lifestyle_es;
+					hobbies = hobbies_es;
+					break;
+			}
+
+			firstWordList.innerHTML = '';
+			secondWordList.innerHTML = '';
+
+			conditions.forEach(function(item){
+			   var option = document.createElement('option');
+			   option.value = item;
+			   firstWordList.appendChild(option);
+			});
+
+			lifestyle.concat(hobbies).forEach(function(item){
+			   var option = document.createElement('option');
+			   option.value = item;
+			   secondWordList.appendChild(option);
+			});
+
+			validateInput();
+
+		}
+
+		loadWords(lang);
 
 		var unreachable_tiles = [105, 119, 144, 296, 297, 298];
 
@@ -520,21 +665,6 @@
 
 		const canvas = document.getElementById("overlayCanvas");
         const context = canvas.getContext("2d");
-
-		var firstWordList = document.getElementById('firstWord');
-		var secondWordList = document.getElementById('secondWord');
-
-		conditions.forEach(function(item){
-		   var option = document.createElement('option');
-		   option.value = item;
-		   firstWordList.appendChild(option);
-		});
-
-		lifestyle.concat(hobbies).forEach(function(item){
-		   var option = document.createElement('option');
-		   option.value = item;
-		   secondWordList.appendChild(option);
-		});
 
         function colorPixels(tileCoords, color) {
             context.fillStyle = color;//"rgba(255, 0, 0, 1)";
@@ -743,6 +873,14 @@
 	        document.body.scrollTop = 0;
 	        document.documentElement.scrollTop = 0;
 	    }
+
+	    $(".dropdown-item").on("click",(function(){
+        	var lang = $(this).attr('id');
+            $("#defaultIcon").removeClass($("#defaultIcon").attr('class'));
+            $("#defaultIcon").addClass("flag-icon flag-icon-" + lang);
+            loadWords(lang);
+      	}));
+
     </script>
 </body>
 </html>
