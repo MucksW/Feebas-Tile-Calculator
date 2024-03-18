@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.5/css/flag-icons.min.css"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -13,30 +13,30 @@
 
     <style>
         body {
-        	font-family: 'Arial', sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             background-color: #f4f4f4;
             margin: 20px;
         }
 
         #disclaimer {
-		  background-color: #ffffcc;
-		  border-left: 6px solid #ffeb3b;
-		  padding: 4px 12px;
-		  text-align: justify;
-		}
+          background-color: #ffffcc;
+          border-left: 6px solid #ffeb3b;
+          padding: 4px 12px;
+          text-align: justify;
+        }
 
         #imageContainer {
             width:641px;
-      		height:1553px;
-      		margin-bottom: 20px;
+              height:1553px;
+              margin-bottom: 20px;
         }
 
         #routeImage {
             position: absolute;
             display: block;
             width:641px;
-      		height:1553px;
+              height:1553px;
         }
 
         #overlayCanvas {
@@ -141,101 +141,101 @@
         }
 
         #square0 {
-			position: relative;
-			display: inline-block;
-			border: 1px solid black;
-			height: 16px;
-			width: 16px;
-			background: #E34234;
-		}
+            position: relative;
+            display: inline-block;
+            border: 1px solid black;
+            height: 16px;
+            width: 16px;
+            background: #E34234;
+        }
 
-		#square1 {
-			position: relative;
-			display: inline-block;
-			border: 1px solid black;
-			height: 16px;
-			width: 16px;
-			background: #FFD700;
-		}
+        #square1 {
+            position: relative;
+            display: inline-block;
+            border: 1px solid black;
+            height: 16px;
+            width: 16px;
+            background: #FFD700;
+        }
 
-		#square2 {
-			position: relative;
-			display: inline-block;
-			border: 1px solid black;
-			height: 16px;
-			width: 16px;
-			background: #0BDA51;
-		}
+        #square2 {
+            position: relative;
+            display: inline-block;
+            border: 1px solid black;
+            height: 16px;
+            width: 16px;
+            background: #0BDA51;
+        }
 
-		#resultContainer td {
-        	font-family: Consolas;
-		}
+        #resultContainer td {
+            font-family: Consolas;
+        }
 
-		.colorPicker {
-			position: absolute;
-			top: 0;
-			left: 0;
-			height: 100%;
-			width: 100%;
-			opacity: 0;
-			cursor: pointer;
-		}
+        .colorPicker {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
 
-		input:invalid {
-			border: 2px solid red;
-			outline: none;
-		}
+        input:invalid {
+            border: 2px solid red;
+            outline: none;
+        }
 
-		.info {
-			position:relative;
-			cursor: help;
-			color: blue;
-	    }
+        .info {
+            position:relative;
+            cursor: help;
+            color: blue;
+        }
 
-	    .info span {
-			display:none;
-			-moz-border-radius:6px;
-			-webkit-border-radius:6px;
-			border-radius:6px;
-			color:black;
-			background:white;
+        .info span {
+            display:none;
+            -moz-border-radius:6px;
+            -webkit-border-radius:6px;
+            border-radius:6px;
+            color:black;
+            background:white;
 
-	    }
+        }
 
-	    .info span img {
-			float:left;
-	    }
+        .info span img {
+            float:left;
+        }
 
-	    .info:hover span, .info:active span {
-			display : block;
-			position : absolute;
-			top : 0;
-			left : 0;
-			z-index : 1;
-			border : 1px solid black;
-			margin-top : 12px;
-			margin-left : 12px;
-			padding : 4px;
-	    }
+        .info:hover span, .info:active span {
+            display : block;
+            position : absolute;
+            top : 0;
+            left : 0;
+            z-index : 1;
+            border : 1px solid black;
+            margin-top : 12px;
+            margin-left : 12px;
+            padding : 4px;
+        }
 
-	    .dropdown-menu{
-	    	min-width: 0px; 
-	    }
+        .dropdown-menu{
+            min-width: 0px; 
+        }
 
-	    td .dropdown {
-		    position: absolute;
-			right: 7px;
-			top: 7px;
-		}
+        td .dropdown {
+            position: absolute;
+            right: 7px;
+            top: 7px;
+        }
 
-		td .dropdown .dropdown-toggle{
-			padding: 7px;
-			background: rgba(208,208,208,1);
-		}
+        td .dropdown .dropdown-toggle{
+            padding: 7px;
+            background: rgba(208,208,208,1);
+        }
 
-		td .dropdown .dropdown-menu{
-			background: rgba(208,208,208,0.7);
-		}
+        td .dropdown .dropdown-menu{
+            background: rgba(208,208,208,0.7);
+        }
 
 
     </style>
@@ -243,20 +243,20 @@
 <body>
 <div class="container">
   <div class="row">
-	<div class="col-md-6">
+    <div class="col-md-6">
         <h1>Feebas Tile Calculator</h1>
         <p id="disclaimer">
         <span>The calculated Feebas tiles can only be reliably predicted if the trendy phrase in Dewford City was not changed manually. If you cannot find the words of your trendy phrase in the list, this means that the trend has been changed.</span>
         <a class="info" >
-			<i class="fa" style="color:#3F00FF">&#xf059;</i>
-			<span><img src="help.png"></span>
-		</a>
+            <i class="fa" style="color:#3F00FF">&#xf059;</i>
+            <span><img src="help.png"></span>
+        </a>
         </p>
 
 
         <table class="inputTable"> 
             <form id="calculatorForm">
-            	<tr>
+                <tr>
                     <th><label for="gameOption" id="game">Game</label></th>
                     <td><select id="gameOption" name="gameOption">
                             <option value="RS">Ruby/Sapphire</option>
@@ -270,31 +270,31 @@
                 </tr>
                 <tr>
                     <td colspan="2" ><label style="font-weight:bold;">Dewford Trend</label>
-				        <div class="dropdown">  
-				            <button type="button" class="dropdown-toggle" data-toggle="dropdown">  
-				                <a id="defaultIcon" class="flag-icon flag-icon-gb"></a>
-				            </button>  
-				            <div class="dropdown-menu">  
-				                <a id="gb" title="English" class="dropdown-item"><i class="flag-icon flag-icon-gb"></i></a>
-				                <a id="jp" title="Japanese" class="dropdown-item"><i class="flag-icon flag-icon-jp"></i></a>
-				                <a id="fr" title="French" class="dropdown-item"><i class="flag-icon flag-icon-fr"></i></a>
-				                <a id="de" title="German" class="dropdown-item"><i class="flag-icon flag-icon-de"></i></a>
-				                <a id="it" title="Italian" class="dropdown-item"><i class="flag-icon flag-icon-it"></i></a>
-				                <a id="es" title="Spanish" class="dropdown-item"><i class="flag-icon flag-icon-es"></i></a>
-				            </div>  
-				        </div>  
-				    </td>
+                        <div class="dropdown">  
+                            <button type="button" class="dropdown-toggle" data-toggle="dropdown">  
+                                <a id="defaultIcon" class="flag-icon flag-icon-gb"></a>
+                            </button>  
+                            <div class="dropdown-menu">  
+                                <a id="gb" title="English" class="dropdown-item"><i class="flag-icon flag-icon-gb"></i></a>
+                                <a id="jp" title="Japanese" class="dropdown-item"><i class="flag-icon flag-icon-jp"></i></a>
+                                <a id="fr" title="French" class="dropdown-item"><i class="flag-icon flag-icon-fr"></i></a>
+                                <a id="de" title="German" class="dropdown-item"><i class="flag-icon flag-icon-de"></i></a>
+                                <a id="it" title="Italian" class="dropdown-item"><i class="flag-icon flag-icon-it"></i></a>
+                                <a id="es" title="Spanish" class="dropdown-item"><i class="flag-icon flag-icon-es"></i></a>
+                            </div>  
+                        </div>  
+                    </td>
                 </tr>
                 <tr>
                     <th><label for="firstWordInput">First Word</label></th>
                     <td><input class="selection" list="firstWord" id="firstWordInput" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
-                    	<datalist id="firstWord"></datalist>
+                        <datalist id="firstWord"></datalist>
                     </td>
                 </tr>
                 <tr>
                     <th><label for="secondWordInput">Second Word</label></th>
                     <td><input class="selection" list="secondWord" id="secondWordInput" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
-                    	<datalist id="secondWord"></datalist>
+                        <datalist id="secondWord"></datalist>
                     </td>
                 </tr>
             </form>
@@ -303,19 +303,19 @@
 
         <table  id="resultContainer">
           <tr>
-          	<th><input type="checkbox" id="result0Checkbox" checked onclick="calculate_if_generated()"></th>
+              <th><input type="checkbox" id="result0Checkbox" checked onclick="calculate_if_generated()"></th>
             <th width="75%"> Feebas Random Value</div></th>
             <th><div id="square0"><input type="color" class="colorPicker" value="#E34234" id="colorPicker0"/></div></th>
             <td id="result0">0000</th>
           </tr>
           <tr>
-          	<th><input type="checkbox" id="result1Checkbox" onclick="calculate_if_generated()"></th>
+              <th><input type="checkbox" id="result1Checkbox" onclick="calculate_if_generated()"></th>
             <th>First Alternative</div></th>
             <th><div id="square1"><input type="color" class="colorPicker" value="#FFD700" id="colorPicker1"/></div></th>
             <td id="result1">0000</th>
           </tr>
           <tr>
-          	<th><input type="checkbox" id="result2Checkbox" onclick="calculate_if_generated()"></th>
+              <th><input type="checkbox" id="result2Checkbox" onclick="calculate_if_generated()"></th>
             <th>Second Alternative</div></th>
             <th><div id="square2"><input type="color" class="colorPicker" value="#0BDA51" id="colorPicker2"/></div></th>
             <td id="result2">0000</th>
@@ -396,301 +396,301 @@
                                 [305, 1489], [129, 1505], [145, 1505], [161, 1505], [177, 1505], [193, 1505], [113, 1521], [129, 1521]];
 
         // 69 elements
-		var conditions_en = ["HOT", "EXISTS", "EXCESS", "APPROVED", "HAS", "GOOD", "LESS", "MOMENTUM", "GOING", "WEIRD", "BUSY", "TOGETHER", "FULL", "ABSENT", "BEING", "NEED", "TASTY", "SKILLED", "NOISY", "BIG", "LATE", "CLOSE", "DOCILE", "AMUSING", "ENTERTAINING", "PERFECTION", "PRETTY", "HEALTHY", "EXCELLENT", "UPSIDE DOWN", "COLD", "REFRESHING", "UNAVOIDABLE", "MUCH", "OVERWHELMING", "FABULOUS", "ELSE", "EXPENSIVE", "CORRECT", "IMPOSSIBLE", "SMALL", "DIFFERENT", "TIRED", "SKILL", "TOP", "NON STOP", "PREPOSTEROUS", "NONE", "NOTHING", "NATURAL", "BECOMES", "LUKEWARM", "FAST", "LOW", "AWFUL", "ALONE", "BORED", "SECRET", "MYSTERY", "LACKS", "BEST", "LOUSY", "MISTAKE", "KIND", "WELL", "WEAKENED", "SIMPLE", "SEEMS", "BADLY"];
-
-		var conditions_jp = ["あつい", "あった", "あまり", "あり", "ある", "いい", "いか", "いきおい", "いける", "いじょう", "いそがしい", "いっしょに", "いっぱい", "いない", "いや", "いる", "うまい", "うまく", "うるさい", "おおきい", "おくれ", "おしい", "おとなしい", "おもしろい", "おもしろく", "かんぺき", "けっこう", "げんき", "さいこう", "さかさま", "さむい", "さわやか", "しかたない", "すごい", "すごすぎ", "すてき", "たいした", "たかい", "ただしい", "だめ", "ちいさい", "ちがう", "つかれ", "とくい", "トップ", "とまらない", "とんでもない", "ない", "なかった", "なし", "なって", "ぬるい", "はやい", "ひくい", "ひどい", "ひとりで", "ひま", "ひみつ", "ふしぎ", "ふそく", "ベスト", "へた", "まちがって", "やさしい", "よく", "よわって", "らく", "らしい", "わるい"];
-
-		var conditions_fr = ["CHAUD", "EXISTE", "EXCES", "APPROUVE", "LENT", "BON", "LENTEUR", "VITESSE", "FACILITE", "BIZARRE", "OCCUPE", "ENSEMBLE", "PLEIN", "ABSENT", "ETANT", "J'AI BESOIN", "DELICIEUX", "DOUE", "BRUYANT", "ENORME", "TARD", "PROCHE", "DOCILE", "AMUSANT", "DISTRAYANT", "PERFECTION", "JOLI", "EN FORME", "REMARQUABLE", "BEBETE", "FROID", "FRAIS", "INEVITABLE", "IGNORANT", "IRRESISTIBLE", "FABULEUX", "NUNUCHE", "CHER", "CORRECTEMENT", "IMPOSSIBLE", "PETIT", "DIFFERENT", "FATIGUE", "HABILETE", "MAXIMUM", "NON-STOP", "RIDICULE", "AUCUN", "RIEN", "NATUREL", "DEVIENT", "TIEDE", "RAPIDE", "BAS", "TERRIBLE", "SEUL", "JE M'ENNUIE", "SECRET", "MYSTERE", "IL MANQUE", "MEILLEUR", "MINABLE", "ERREUR", "AGREABLE", "PIRE", "AFFAIBLI", "SIMPLE", "ON DIRAIT", "GRAVEMENT"];
-
-		var conditions_de = ["HEISS", "EXISTIERT", "ÜBERMÄSSIG", "GENEHMIGT", "HAT", "FEIN", "WENIGER", "SCHWUNG", "GEHEN", "VERRÜCKT", "BESCHÄFTIGT", "ZUSAMMEN", "VOLL", "ABWESEND", "SEINE", "BRAUCHE", "LECKER", "GESCHICKT", "LAUT", "GROSS", "SPÄT", "NAHE BEI", "SANFTMÜTIG", "AMÜSANT", "UNTERHALTSAM", "PERFEKTION", "HÜBSCH", "GESUND", "EXZELLENT", "UMGEDREHT", "KALT", "ERFRISCHEND", "UNVERMEIDBAR", "VIELE", "MITREISSEND", "FABELHAFT", "ANDERES", "TEUER", "RICHTIG", "UNMÖGLICH", "KLEIN", "VERSCHIEDENE", "MÜDE", "GESCHICK", "TOP", "NONSTOP", "ABSURD", "KEIN", "NICHTS", "NATÜRLICH", "WIRD", "LAUWARM", "SCHNELL", "NIEDRIG", "SCHLIMM", "ALLEINE", "GELANGWEILT", "GEHEIMNIS", "GEHEIM", "FEHLT", "BESTES", "LAUSIG", "FEHLER", "HÖFLICH", "SCHLECHT", "GESCHWÄCHT", "EINFACH", "SCHEINBAR", "MIES"];
-
-		var conditions_it = ["ALTRUISMO", "VIRTÙ", "BUONE", "BUONI", "BUONA", "BUONO", "È BRAVO", "DI SLANCIO", "È BRAVA", "SONO BRAVI", "CON CORAGGIO", "VIVACITÀ", "CREDO IN TE", "SONO GRANDE", "BONTÀ", "CORTESIA", "SAPIDA", "TALENTO", "BON TON", "SEI GRANDE", "EFFICACE", "EFFICACI", "AFFABILE", "DIVERTENTI", "DIVERTENTE", "PERFEZIONE", "AFFABILI", "TI STUPIRÀ", "ECCELLENTE", "ECCELLENTI", "TRAVOLGENTI", "TROPPO FORTE", "NATURALI", "TI AMMIRO", "TRAVOLGENTE", "UNA FAVOLA", "AMMIRAZIONE", "FENOMENALE", "FENOMENALI", "CHE FENOMENO", "FENOMENO", "SEI UN MITO", "SONO UN MITO", "ABILITÀ", "SEI AL TOP", "SONO AL TOP", "È IL MASSIMO", "VI AMMIRO", "SONO GRANDI", "NATURALE", "SONO FORTI", "CHI TI BATTE", "MI STUPISCI", "TI STUPIRÒ", "LAVORA SODO", "IN FORMA", "ECCEZIONALE", "ECCEZIONALI", "SEGRETO", "SIMPATIA", "SIETE GRANDI", "SONO MITICI", "SIAMO MITICI", "IMBATTIBILE", "IMBATTIBILI", "CREDO IN VOI", "SEMPLICE", "SEMPLICI", "VALORE"];
-
-		var conditions_es = ["BONDADOSO", "BONDADOSA", "LEAL", "FUERTE", "MIEDO", "ÚNICO", "ÚNICA", "RAPIDÍSIMA", "RAPIDÍSIMO", "FURIA", "CERTERO", "CERTERA", "FUERTES", "SAGAZ", "GENIAL", "CORDIAL", "MAÑOSO", "MAÑOSA", "ASTUTO", "ASTUTA", "CARISMÁTICOS", "PACIENTE", "DÓCIL", "GRACIOSO", "GRACIOSA", "CONSTANTE", "SERENO", "SERENA", "RESPETUOSO", "RESPETUOSA", "SEGURO", "SEGURA", "TENAZ", "AMABLE", "PRUDENTE", "RESPONSABLE", "DISCRETO", "DISCRETA", "CORRECTA", "CORRECTO", "MODERADO", "MODERADA", "RESISTENTE", "RÁPIDO", "RÁPIDA", "SENSIBLE", "FOGOSA", "FOGOSO", "SILENCIOSO", "SILENCIOSA", "CAPAZ", "REFLEXIVO", "REFLEXIVA", "ENÉRGICO", "ENÉRGICA", "SENSATO", "SENSATA", "HUMILDE", "MISTERIOSO", "ENIGMÁTICO", "ENIGMÁTICA", "VELOZ", "ÁGIL", "EVASIVO", "EVASIVA", "SENCILLO", "SENCILLA", "DIVERTIDA", "DIVERTIDO"];
-
-		// 45 elements
-		var lifestyle_en = ["CHORES", "HOME", "MONEY", "ALLOWANCE", "BATH", "CONVERSATION", "SCHOOL", "COMMEMORATE", "HABIT", "GROUP", "WORD", "STORE", "SERVICE", "WORK", "SYSTEM", "TRAIN", "CLASS", "LESSONS", "INFORMATION", "LIVING", "TEACHER", "TOURNAMENT", "LETTER", "EVENT", "DIGITAL", "TEST", "DEPT STORE", "TELEVISION", "PHONE", "ITEM", "NAME", "NEWS", "POPULAR", "PARTY", "STUDY", "MACHINE", "MAIL", "MESSAGE", "PROMISE", "DREAM", "KINDERGARTEN", "LIFE", "RADIO", "RENTAL", "WORLD"];
-
-		var lifestyle_jp = ["アルバイト", "うち", "おかね", "おこづかい", "おふろ", "かいわ", "がっこう", "きねん", "くせ", "グループ", "ことば", "コンビニ", "サービス", "しごと", "システム", "しゅぎょう", "じゅぎょう", "じゅく", "じょうほう", "せいかつ", "せんせい", "たいかい", "てがみ", "できごと", "デジタル", "テスト", "デパート", "テレビ", "でんわ", "どうぐ", "なまえ", "ニュース", "にんき", "パーティー", "べんきょう", "マシン", "メール", "メッセージ", "やくそく", "ゆめ", "ようちえん", "ライフ", "ラジオ", "レンタル", "ワールド"];
+        var conditions_en = ["HOT", "EXISTS", "EXCESS", "APPROVED", "HAS", "GOOD", "LESS", "MOMENTUM", "GOING", "WEIRD", "BUSY", "TOGETHER", "FULL", "ABSENT", "BEING", "NEED", "TASTY", "SKILLED", "NOISY", "BIG", "LATE", "CLOSE", "DOCILE", "AMUSING", "ENTERTAINING", "PERFECTION", "PRETTY", "HEALTHY", "EXCELLENT", "UPSIDE DOWN", "COLD", "REFRESHING", "UNAVOIDABLE", "MUCH", "OVERWHELMING", "FABULOUS", "ELSE", "EXPENSIVE", "CORRECT", "IMPOSSIBLE", "SMALL", "DIFFERENT", "TIRED", "SKILL", "TOP", "NON STOP", "PREPOSTEROUS", "NONE", "NOTHING", "NATURAL", "BECOMES", "LUKEWARM", "FAST", "LOW", "AWFUL", "ALONE", "BORED", "SECRET", "MYSTERY", "LACKS", "BEST", "LOUSY", "MISTAKE", "KIND", "WELL", "WEAKENED", "SIMPLE", "SEEMS", "BADLY"];
+
+        var conditions_jp = ["あつい", "あった", "あまり", "あり", "ある", "いい", "いか", "いきおい", "いける", "いじょう", "いそがしい", "いっしょに", "いっぱい", "いない", "いや", "いる", "うまい", "うまく", "うるさい", "おおきい", "おくれ", "おしい", "おとなしい", "おもしろい", "おもしろく", "かんぺき", "けっこう", "げんき", "さいこう", "さかさま", "さむい", "さわやか", "しかたない", "すごい", "すごすぎ", "すてき", "たいした", "たかい", "ただしい", "だめ", "ちいさい", "ちがう", "つかれ", "とくい", "トップ", "とまらない", "とんでもない", "ない", "なかった", "なし", "なって", "ぬるい", "はやい", "ひくい", "ひどい", "ひとりで", "ひま", "ひみつ", "ふしぎ", "ふそく", "ベスト", "へた", "まちがって", "やさしい", "よく", "よわって", "らく", "らしい", "わるい"];
+
+        var conditions_fr = ["CHAUD", "EXISTE", "EXCES", "APPROUVE", "LENT", "BON", "LENTEUR", "VITESSE", "FACILITE", "BIZARRE", "OCCUPE", "ENSEMBLE", "PLEIN", "ABSENT", "ETANT", "J'AI BESOIN", "DELICIEUX", "DOUE", "BRUYANT", "ENORME", "TARD", "PROCHE", "DOCILE", "AMUSANT", "DISTRAYANT", "PERFECTION", "JOLI", "EN FORME", "REMARQUABLE", "BEBETE", "FROID", "FRAIS", "INEVITABLE", "IGNORANT", "IRRESISTIBLE", "FABULEUX", "NUNUCHE", "CHER", "CORRECTEMENT", "IMPOSSIBLE", "PETIT", "DIFFERENT", "FATIGUE", "HABILETE", "MAXIMUM", "NON-STOP", "RIDICULE", "AUCUN", "RIEN", "NATUREL", "DEVIENT", "TIEDE", "RAPIDE", "BAS", "TERRIBLE", "SEUL", "JE M'ENNUIE", "SECRET", "MYSTERE", "IL MANQUE", "MEILLEUR", "MINABLE", "ERREUR", "AGREABLE", "PIRE", "AFFAIBLI", "SIMPLE", "ON DIRAIT", "GRAVEMENT"];
+
+        var conditions_de = ["HEISS", "EXISTIERT", "ÜBERMÄSSIG", "GENEHMIGT", "HAT", "FEIN", "WENIGER", "SCHWUNG", "GEHEN", "VERRÜCKT", "BESCHÄFTIGT", "ZUSAMMEN", "VOLL", "ABWESEND", "SEINE", "BRAUCHE", "LECKER", "GESCHICKT", "LAUT", "GROSS", "SPÄT", "NAHE BEI", "SANFTMÜTIG", "AMÜSANT", "UNTERHALTSAM", "PERFEKTION", "HÜBSCH", "GESUND", "EXZELLENT", "UMGEDREHT", "KALT", "ERFRISCHEND", "UNVERMEIDBAR", "VIELE", "MITREISSEND", "FABELHAFT", "ANDERES", "TEUER", "RICHTIG", "UNMÖGLICH", "KLEIN", "VERSCHIEDENE", "MÜDE", "GESCHICK", "TOP", "NONSTOP", "ABSURD", "KEIN", "NICHTS", "NATÜRLICH", "WIRD", "LAUWARM", "SCHNELL", "NIEDRIG", "SCHLIMM", "ALLEINE", "GELANGWEILT", "GEHEIMNIS", "GEHEIM", "FEHLT", "BESTES", "LAUSIG", "FEHLER", "HÖFLICH", "SCHLECHT", "GESCHWÄCHT", "EINFACH", "SCHEINBAR", "MIES"];
+
+        var conditions_it = ["ALTRUISMO", "VIRTÙ", "BUONE", "BUONI", "BUONA", "BUONO", "È BRAVO", "DI SLANCIO", "È BRAVA", "SONO BRAVI", "CON CORAGGIO", "VIVACITÀ", "CREDO IN TE", "SONO GRANDE", "BONTÀ", "CORTESIA", "SAPIDA", "TALENTO", "BON TON", "SEI GRANDE", "EFFICACE", "EFFICACI", "AFFABILE", "DIVERTENTI", "DIVERTENTE", "PERFEZIONE", "AFFABILI", "TI STUPIRÀ", "ECCELLENTE", "ECCELLENTI", "TRAVOLGENTI", "TROPPO FORTE", "NATURALI", "TI AMMIRO", "TRAVOLGENTE", "UNA FAVOLA", "AMMIRAZIONE", "FENOMENALE", "FENOMENALI", "CHE FENOMENO", "FENOMENO", "SEI UN MITO", "SONO UN MITO", "ABILITÀ", "SEI AL TOP", "SONO AL TOP", "È IL MASSIMO", "VI AMMIRO", "SONO GRANDI", "NATURALE", "SONO FORTI", "CHI TI BATTE", "MI STUPISCI", "TI STUPIRÒ", "LAVORA SODO", "IN FORMA", "ECCEZIONALE", "ECCEZIONALI", "SEGRETO", "SIMPATIA", "SIETE GRANDI", "SONO MITICI", "SIAMO MITICI", "IMBATTIBILE", "IMBATTIBILI", "CREDO IN VOI", "SEMPLICE", "SEMPLICI", "VALORE"];
+
+        var conditions_es = ["BONDADOSO", "BONDADOSA", "LEAL", "FUERTE", "MIEDO", "ÚNICO", "ÚNICA", "RAPIDÍSIMA", "RAPIDÍSIMO", "FURIA", "CERTERO", "CERTERA", "FUERTES", "SAGAZ", "GENIAL", "CORDIAL", "MAÑOSO", "MAÑOSA", "ASTUTO", "ASTUTA", "CARISMÁTICOS", "PACIENTE", "DÓCIL", "GRACIOSO", "GRACIOSA", "CONSTANTE", "SERENO", "SERENA", "RESPETUOSO", "RESPETUOSA", "SEGURO", "SEGURA", "TENAZ", "AMABLE", "PRUDENTE", "RESPONSABLE", "DISCRETO", "DISCRETA", "CORRECTA", "CORRECTO", "MODERADO", "MODERADA", "RESISTENTE", "RÁPIDO", "RÁPIDA", "SENSIBLE", "FOGOSA", "FOGOSO", "SILENCIOSO", "SILENCIOSA", "CAPAZ", "REFLEXIVO", "REFLEXIVA", "ENÉRGICO", "ENÉRGICA", "SENSATO", "SENSATA", "HUMILDE", "MISTERIOSO", "ENIGMÁTICO", "ENIGMÁTICA", "VELOZ", "ÁGIL", "EVASIVO", "EVASIVA", "SENCILLO", "SENCILLA", "DIVERTIDA", "DIVERTIDO"];
+
+        // 45 elements
+        var lifestyle_en = ["CHORES", "HOME", "MONEY", "ALLOWANCE", "BATH", "CONVERSATION", "SCHOOL", "COMMEMORATE", "HABIT", "GROUP", "WORD", "STORE", "SERVICE", "WORK", "SYSTEM", "TRAIN", "CLASS", "LESSONS", "INFORMATION", "LIVING", "TEACHER", "TOURNAMENT", "LETTER", "EVENT", "DIGITAL", "TEST", "DEPT STORE", "TELEVISION", "PHONE", "ITEM", "NAME", "NEWS", "POPULAR", "PARTY", "STUDY", "MACHINE", "MAIL", "MESSAGE", "PROMISE", "DREAM", "KINDERGARTEN", "LIFE", "RADIO", "RENTAL", "WORLD"];
+
+        var lifestyle_jp = ["アルバイト", "うち", "おかね", "おこづかい", "おふろ", "かいわ", "がっこう", "きねん", "くせ", "グループ", "ことば", "コンビニ", "サービス", "しごと", "システム", "しゅぎょう", "じゅぎょう", "じゅく", "じょうほう", "せいかつ", "せんせい", "たいかい", "てがみ", "できごと", "デジタル", "テスト", "デパート", "テレビ", "でんわ", "どうぐ", "なまえ", "ニュース", "にんき", "パーティー", "べんきょう", "マシン", "メール", "メッセージ", "やくそく", "ゆめ", "ようちえん", "ライフ", "ラジオ", "レンタル", "ワールド"];
 
-		var lifestyle_fr = ["ROUTINE", "MAISON", "ARGENT", "TRANSPORTS", "BAIN", "CONVERSATION", "ECOLE", "ANNIVERSAIRE", "HABITUDES", "GROUPE", "MOT", "MAGASIN", "SERVICE", "TRAVAIL", "SYSTEME", "TRAIN", "CLASSE", "DEVOIRS", "INFORMATIONS", "QUOTIDIEN", "PROFESSEUR", "TOURNOI", "LETTRE", "EVENEMENT", "NUMERIQUE", "CONTROLE", "EPICERIE", "TELEVISION", "TELEPHONE", "OBJET", "NOM", "NOUVELLES", "CELEBRE", "FETE", "ETUDIER", "ORDINATEUR", "COURRIER", "MESSAGE", "PROMESSE", "REVE", "MATERNELLE", "VIE", "RADIO", "LOYER", "MONDE"];
+        var lifestyle_fr = ["ROUTINE", "MAISON", "ARGENT", "TRANSPORTS", "BAIN", "CONVERSATION", "ECOLE", "ANNIVERSAIRE", "HABITUDES", "GROUPE", "MOT", "MAGASIN", "SERVICE", "TRAVAIL", "SYSTEME", "TRAIN", "CLASSE", "DEVOIRS", "INFORMATIONS", "QUOTIDIEN", "PROFESSEUR", "TOURNOI", "LETTRE", "EVENEMENT", "NUMERIQUE", "CONTROLE", "EPICERIE", "TELEVISION", "TELEPHONE", "OBJET", "NOM", "NOUVELLES", "CELEBRE", "FETE", "ETUDIER", "ORDINATEUR", "COURRIER", "MESSAGE", "PROMESSE", "REVE", "MATERNELLE", "VIE", "RADIO", "LOYER", "MONDE"];
 
-		var lifestyle_de = ["PFLICHTEN", "HEIM", "GELD", "TASCHENGELD", "BAD", "GESPRÄCH", "SCHULE", "GEDENKEN", "GEWOHNHEIT", "GRUPPE", "WORT", "LAGER", "SERVICE", "ARBEIT", "SYSTEM", "TRAINIEREN", "LEKTION", "UNTERRICHT", "INFORMATION", "LEBENDIG", "LEHRER", "TURNIER", "BRIEF", "GESCHEHEN", "DIGITALES", "TEST", "KAUFHAUS", "FERNSEHER", "TELEFON", "ITEM", "NAME", "NEUIGKEITEN", "POPULÄR", "PARTY", "LERNEN", "MASCHINE", "POST", "MITTEILUNG", "VERSPRECHEN", "TRAUM", "KINDERGARTEN", "LEBEN", "RADIO", "MIETE", "WELT"];
+        var lifestyle_de = ["PFLICHTEN", "HEIM", "GELD", "TASCHENGELD", "BAD", "GESPRÄCH", "SCHULE", "GEDENKEN", "GEWOHNHEIT", "GRUPPE", "WORT", "LAGER", "SERVICE", "ARBEIT", "SYSTEM", "TRAINIEREN", "LEKTION", "UNTERRICHT", "INFORMATION", "LEBENDIG", "LEHRER", "TURNIER", "BRIEF", "GESCHEHEN", "DIGITALES", "TEST", "KAUFHAUS", "FERNSEHER", "TELEFON", "ITEM", "NAME", "NEUIGKEITEN", "POPULÄR", "PARTY", "LERNEN", "MASCHINE", "POST", "MITTEILUNG", "VERSPRECHEN", "TRAUM", "KINDERGARTEN", "LEBEN", "RADIO", "MIETE", "WELT"];
 
-		var lifestyle_it = ["COMPITI", "CASA", "SOLDI", "PAGHETTA", "BAGNO", "DIALOGO", "SCUOLA", "CELEBRAZIONE", "ABITUDINE", "GRUPPO", "PAROLA", "MAESTRO", "LAVAGNA", "LAVORO", "SISTEMA", "TRENO", "AULA", "LEZIONI", "INFORMAZIONI", "VIVA LA VITA", "INSEGNANTE", "TORNEO", "LETTERA", "EVENTO", "TECNOLOGIA", "PALLONE", "NEGOZIO", "TELEVISIONE", "TELEFONO", "STRUMENTO", "NOME", "NOTIZIE", "MAESTRA", "FESTA", "STUDIO", "MACCHINA", "MESSAGGIO", "POSTA", "PROMESSA", "SOGNO", "ASILO", "VITA", "RADIO", "E-MAIL", "MONDO"];
+        var lifestyle_it = ["COMPITI", "CASA", "SOLDI", "PAGHETTA", "BAGNO", "DIALOGO", "SCUOLA", "CELEBRAZIONE", "ABITUDINE", "GRUPPO", "PAROLA", "MAESTRO", "LAVAGNA", "LAVORO", "SISTEMA", "TRENO", "AULA", "LEZIONI", "INFORMAZIONI", "VIVA LA VITA", "INSEGNANTE", "TORNEO", "LETTERA", "EVENTO", "TECNOLOGIA", "PALLONE", "NEGOZIO", "TELEVISIONE", "TELEFONO", "STRUMENTO", "NOME", "NOTIZIE", "MAESTRA", "FESTA", "STUDIO", "MACCHINA", "MESSAGGIO", "POSTA", "PROMESSA", "SOGNO", "ASILO", "VITA", "RADIO", "E-MAIL", "MONDO"];
 
-		var lifestyle_es = ["RUTINA", "HOGAR", "DINERO", "PAGA SEMANAL", "BAÑO", "CHARLAR", "COLEGIO", "CUMPLEAÑOS", "HÁBITOS", "AMIGOS", "PRENSA", "MERCADO", "TRÁFICO", "TRABAJO", "AUTOBÚS", "METRO", "CLASES", "DEBERES", "DESAYUNAR", "MERENDAR", "PROFESOR", "CENAR", "CORREO", "EVENTO", "NOTAS", "EXÁMENES", "TIENDAS", "TELEVISIÓN", "TELÉFONO", "RECREO", "DUCHARSE", "PAN", "CINE", "TEATRO", "ESTUDIOS", "COCHES", "PELUQUERÍA", "MENSAJES", "PARQUE", "AULA", "PISCINA", "PLAYA", "RADIO", "REÍR", "LLORAR"];
+        var lifestyle_es = ["RUTINA", "HOGAR", "DINERO", "PAGA SEMANAL", "BAÑO", "CHARLAR", "COLEGIO", "CUMPLEAÑOS", "HÁBITOS", "AMIGOS", "PRENSA", "MERCADO", "TRÁFICO", "TRABAJO", "AUTOBÚS", "METRO", "CLASES", "DEBERES", "DESAYUNAR", "MERENDAR", "PROFESOR", "CENAR", "CORREO", "EVENTO", "NOTAS", "EXÁMENES", "TIENDAS", "TELEVISIÓN", "TELÉFONO", "RECREO", "DUCHARSE", "PAN", "CINE", "TEATRO", "ESTUDIOS", "COCHES", "PELUQUERÍA", "MENSAJES", "PARQUE", "AULA", "PISCINA", "PLAYA", "RADIO", "REÍR", "LLORAR"];
 
-		// 54 elements
-		var hobbies_en = ["IDOL", "ANIME", "SONG", "MOVIE", "SWEETS", "CHAT", "CHILD S PLAY", "TOYS", "MUSIC", "CARDS", "SHOPPING", "CAMERA", "VIEWING", "SPECTATOR", "GOURMET", "GAME", "RPG", "COLLECTION", "COMPLETE", "MAGAZINE", "WALK", "BIKE", "HOBBY", "SPORTS", "SOFTWARE", "SONGS", "DIET", "TREASURE", "TRAVEL", "DANCE", "CHANNEL", "MAKING", "FISHING", "DATE", "DESIGN", "LOCOMOTIVE", "PLUSH DOLL", "PC", "FLOWERS", "HERO", "NAP", "HEROINE", "FASHION", "ADVENTURE", "BOARD", "BALL", "BOOK", "FESTIVAL", "COMICS", "HOLIDAY", "PLANS", "TRENDY", "VACATION", "LOOK"];
+        // 54 elements
+        var hobbies_en = ["IDOL", "ANIME", "SONG", "MOVIE", "SWEETS", "CHAT", "CHILD S PLAY", "TOYS", "MUSIC", "CARDS", "SHOPPING", "CAMERA", "VIEWING", "SPECTATOR", "GOURMET", "GAME", "RPG", "COLLECTION", "COMPLETE", "MAGAZINE", "WALK", "BIKE", "HOBBY", "SPORTS", "SOFTWARE", "SONGS", "DIET", "TREASURE", "TRAVEL", "DANCE", "CHANNEL", "MAKING", "FISHING", "DATE", "DESIGN", "LOCOMOTIVE", "PLUSH DOLL", "PC", "FLOWERS", "HERO", "NAP", "HEROINE", "FASHION", "ADVENTURE", "BOARD", "BALL", "BOOK", "FESTIVAL", "COMICS", "HOLIDAY", "PLANS", "TRENDY", "VACATION", "LOOK"];
 
-		var hobbies_jp = ["アイドル", "アニメ", "うた", "えいが", "おかし", "おしゃべり", "おままごと", "おもちゃ", "おんがく", "カード", "かいもの", "カメラ", "かんしょう", "かんせん", "グルメ", "ゲーム", "ごっこ", "コレクション", "コンプリート", "ざっし", "さんぽ", "じてんしゃ", "しゅみ", "スポーツ", "ソフト", "ソング", "ダイエット", "たからもの", "たび", "ダンス", "チャンネル", "つくり", "つり", "デート", "デザイン", "でんしゃ", "ぬいぐるみ", "パソコン", "はな", "ヒーロー", "ひるね", "ヒロイン", "ファッション", "ぼうけん", "ボード", "ボール", "ほん", "まつり", "まんが", "やすみ", "よてい", "りゅうこう", "りょこう", "ルック"];
+        var hobbies_jp = ["アイドル", "アニメ", "うた", "えいが", "おかし", "おしゃべり", "おままごと", "おもちゃ", "おんがく", "カード", "かいもの", "カメラ", "かんしょう", "かんせん", "グルメ", "ゲーム", "ごっこ", "コレクション", "コンプリート", "ざっし", "さんぽ", "じてんしゃ", "しゅみ", "スポーツ", "ソフト", "ソング", "ダイエット", "たからもの", "たび", "ダンス", "チャンネル", "つくり", "つり", "デート", "デザイン", "でんしゃ", "ぬいぐるみ", "パソコン", "はな", "ヒーロー", "ひるね", "ヒロイン", "ファッション", "ぼうけん", "ボード", "ボール", "ほん", "まつり", "まんが", "やすみ", "よてい", "りゅうこう", "りょこう", "ルック"];
 
-		var hobbies_fr = ["STAR", "DESSIN ANIME", "CHANSON", "CINEMA", "BONBONS", "DISCUTER", "JEU D'ENFANT", "JOUETS", "MUSIQUE", "CARTES", "SHOPPING", "PHOTOGRAPHIE", "FOYER", "THEATRE", "CUISINE", "JEUX", "JEUX DE ROLE", "COLLECTION", "JEUX VIDEO", "MAGAZINES", "COURSE", "VELO", "HOBBY", "SPORT", "LOGICIELS", "CHANTER", "DIETETIQUE", "TRESORS", "VOYAGES", "DANSE", "CHAINE", "BRICOLAGE", "PECHE", "RENDEZ-VOUS", "DESSIN", "PETIT TRAIN", "NOUNOURS", "INFORMATIQUE", "JARDINAGE", "HEROS", "SIESTE", "HEROINE", "MODE", "AVENTURE", "BATEAU", "FOOTBALL", "LIVRE", "FESTIVALS", "BD", "VACANCES", "LECTURE", "A LA MODE", "TOURISME", "COCOONING"];
+        var hobbies_fr = ["STAR", "DESSIN ANIME", "CHANSON", "CINEMA", "BONBONS", "DISCUTER", "JEU D'ENFANT", "JOUETS", "MUSIQUE", "CARTES", "SHOPPING", "PHOTOGRAPHIE", "FOYER", "THEATRE", "CUISINE", "JEUX", "JEUX DE ROLE", "COLLECTION", "JEUX VIDEO", "MAGAZINES", "COURSE", "VELO", "HOBBY", "SPORT", "LOGICIELS", "CHANTER", "DIETETIQUE", "TRESORS", "VOYAGES", "DANSE", "CHAINE", "BRICOLAGE", "PECHE", "RENDEZ-VOUS", "DESSIN", "PETIT TRAIN", "NOUNOURS", "INFORMATIQUE", "JARDINAGE", "HEROS", "SIESTE", "HEROINE", "MODE", "AVENTURE", "BATEAU", "FOOTBALL", "LIVRE", "FESTIVALS", "BD", "VACANCES", "LECTURE", "A LA MODE", "TOURISME", "COCOONING"];
 
-		var hobbies_de = ["IDOL", "ANIME", "SONG", "FILM", "NASCHEN", "PLAUDERN", "KINDERSPIEL", "SPIELZEUG", "MUSIK", "KARTENSPIELE", "EINKAUFEN", "FOTOS", "BESICHTIGUNG", "ZUSCHAUER", "GOURMET", "SPIEL", "RPG", "SAMMLUNG", "KOMPLETT", "MAGAZIN", "SPAZIEREN", "FAHRRAD", "HOBBY", "SPORT", "SOFTWARE", "SONGS", "NAHRUNG", "KOSTBARKEIT", "REISEN", "TANZEN", "WASSERSPORT", "HERSTELLUNG", "ANGELN", "VERABREDUNG", "DESIGN", "LOKOMOTIVEN", "PLÜSCHPUPPEN", "PC", "BLUMEN", "HELD", "NICKERCHEN", "HELDIN", "MODE", "ABENTEUER", "BRETTSPIELE", "BALL", "BÜCHER", "FESTIVALS", "COMICS", "FERIEN", "ETWAS PLANEN", "SCHICKIMICKI", "URLAUB", "AUSSEHEN"];
+        var hobbies_de = ["IDOL", "ANIME", "SONG", "FILM", "NASCHEN", "PLAUDERN", "KINDERSPIEL", "SPIELZEUG", "MUSIK", "KARTENSPIELE", "EINKAUFEN", "FOTOS", "BESICHTIGUNG", "ZUSCHAUER", "GOURMET", "SPIEL", "RPG", "SAMMLUNG", "KOMPLETT", "MAGAZIN", "SPAZIEREN", "FAHRRAD", "HOBBY", "SPORT", "SOFTWARE", "SONGS", "NAHRUNG", "KOSTBARKEIT", "REISEN", "TANZEN", "WASSERSPORT", "HERSTELLUNG", "ANGELN", "VERABREDUNG", "DESIGN", "LOKOMOTIVEN", "PLÜSCHPUPPEN", "PC", "BLUMEN", "HELD", "NICKERCHEN", "HELDIN", "MODE", "ABENTEUER", "BRETTSPIELE", "BALL", "BÜCHER", "FESTIVALS", "COMICS", "FERIEN", "ETWAS PLANEN", "SCHICKIMICKI", "URLAUB", "AUSSEHEN"];
 
-		var hobbies_it = ["IDOLO", "ROCK", "SCIARE", "CINEMA", "DOLCI", "CHAT", "GIOCHI", "GIOCATTOLI", "MUSICA", "FIGURINE", "SHOPPING", "FOTOGRAFIA", "ESCURSIONE", "TEATRO", "CUCINARE", "GIOCARE", "INFORMATICA", "COLLEZIONARE", "SCAMBIARE", "MANGIARE", "CAMMINARE", "BICI", "HOBBY", "SPORT", "SOFTWARE", "CANZONE", "CANTARE", "FRANCOBOLLI", "VIAGGIARE", "BALLARE", "LA TV", "VEDERE", "PESCARE", "USCIRE", "DISEGNARE", "TRENINI", "PELUCHE", "PC", "FIORI", "CAMPIONE", "DORMIRE", "CAMPIONESSA", "MODA", "AVVENTURA", "DA TAVOLO", "CALCIO", "LEGGERE", "CORRERE", "FUMETTI", "OZIARE", "MODELLISMO", "GIOCO", "VACANZE", "SCRIVERE"];
+        var hobbies_it = ["IDOLO", "ROCK", "SCIARE", "CINEMA", "DOLCI", "CHAT", "GIOCHI", "GIOCATTOLI", "MUSICA", "FIGURINE", "SHOPPING", "FOTOGRAFIA", "ESCURSIONE", "TEATRO", "CUCINARE", "GIOCARE", "INFORMATICA", "COLLEZIONARE", "SCAMBIARE", "MANGIARE", "CAMMINARE", "BICI", "HOBBY", "SPORT", "SOFTWARE", "CANZONE", "CANTARE", "FRANCOBOLLI", "VIAGGIARE", "BALLARE", "LA TV", "VEDERE", "PESCARE", "USCIRE", "DISEGNARE", "TRENINI", "PELUCHE", "PC", "FIORI", "CAMPIONE", "DORMIRE", "CAMPIONESSA", "MODA", "AVVENTURA", "DA TAVOLO", "CALCIO", "LEGGERE", "CORRERE", "FUMETTI", "OZIARE", "MODELLISMO", "GIOCO", "VACANZE", "SCRIVERE"];
 
-		var hobbies_es = ["ÍDOLO", "DORMIR", "CANTAR", "PELÍCULAS", "GOLOSINAS", "CHATEAR", "JUEGO", "JUGUETES", "MÚSICA", "CROMOS", "COMPRAS", "FOTOGRAFÍA", "EXPOSICIONES", "ESPECTÁCULOS", "COMER BIEN", "CANICAS", "VIDEOJUEGOS", "COLECCIONES", "MAGIA", "REVISTAS", "PASEAR", "CICLISMO", "ESTUDIAR", "DEPORTES", "INTERNET", "VÍDEOS", "COCINAR", "DARDOS", "VIAJAR", "BAILAR", "EXCURSIÓN", "ARTESANÍA", "PESCAR", "CITAS", "DISEÑAR", "TRENES", "PELUCHE", "PC", "FLORES", "HÉROES", "SIESTA", "CAMPAMENTO", "MODA", "AVENTURA", "JUEGOS MESA", "PELOTA", "LIBROS", "DISFRACES", "CÓMICS", "FIESTA", "MAQUETAS", "REFRANES", "VACACIONES", "DANZA"];
+        var hobbies_es = ["ÍDOLO", "DORMIR", "CANTAR", "PELÍCULAS", "GOLOSINAS", "CHATEAR", "JUEGO", "JUGUETES", "MÚSICA", "CROMOS", "COMPRAS", "FOTOGRAFÍA", "EXPOSICIONES", "ESPECTÁCULOS", "COMER BIEN", "CANICAS", "VIDEOJUEGOS", "COLECCIONES", "MAGIA", "REVISTAS", "PASEAR", "CICLISMO", "ESTUDIAR", "DEPORTES", "INTERNET", "VÍDEOS", "COCINAR", "DARDOS", "VIAJAR", "BAILAR", "EXCURSIÓN", "ARTESANÍA", "PESCAR", "CITAS", "DISEÑAR", "TRENES", "PELUCHE", "PC", "FLORES", "HÉROES", "SIESTA", "CAMPAMENTO", "MODA", "AVENTURA", "JUEGOS MESA", "PELOTA", "LIBROS", "DISFRACES", "CÓMICS", "FIESTA", "MAQUETAS", "REFRANES", "VACACIONES", "DANZA"];
 
-		var lang = "gb";
+        var lang = "gb";
 
-		var conditions;
-		var lifestyle;
-		var hobbies;
+        var conditions;
+        var lifestyle;
+        var hobbies;
 
-		var firstWordList = document.getElementById('firstWord');
-		var secondWordList = document.getElementById('secondWord');
+        var firstWordList = document.getElementById('firstWord');
+        var secondWordList = document.getElementById('secondWord');
 
-		function loadWords(lang){
+        function loadWords(lang){
 
-			switch(lang){
-				case 'gb':
-					document.getElementById("firstWordInput").value = "HOT";
-					document.getElementById("secondWordInput").value = "CHORES";
-					conditions = conditions_en;
-					lifestyle = lifestyle_en;
-					hobbies = hobbies_en;
-					break;
-				case 'jp':
-					document.getElementById("firstWordInput").value = "あつい";
-					document.getElementById("secondWordInput").value = "アルバイト";
-					conditions = conditions_jp;
-					lifestyle = lifestyle_jp;
-					hobbies = hobbies_jp;
-					break;
-				case 'fr':
-					document.getElementById("firstWordInput").value = "CHAUD";
-					document.getElementById("secondWordInput").value = "ROUTINE";
-					conditions = conditions_fr;
-					lifestyle = lifestyle_fr;
-					hobbies = hobbies_fr;
-					break;
-				case 'de':
-					document.getElementById("firstWordInput").value = "HEISS";
-					document.getElementById("secondWordInput").value = "PFLICHTEN";
-					conditions = conditions_de;
-					lifestyle = lifestyle_de;
-					hobbies = hobbies_de;
-					break;
-				case 'it':
-					document.getElementById("firstWordInput").value = "ALTRUISMO";
-					document.getElementById("secondWordInput").value = "COMPITI";
-					conditions = conditions_it;
-					lifestyle = lifestyle_it;
-					hobbies = hobbies_it;
-					break;
-				case 'es':
-					document.getElementById("firstWordInput").value = "BONDADOSO";
-					document.getElementById("secondWordInput").value = "RUTINA";
-					conditions = conditions_es;
-					lifestyle = lifestyle_es;
-					hobbies = hobbies_es;
-					break;
-			}
-
-			firstWordList.innerHTML = '';
-			secondWordList.innerHTML = '';
-
-			conditions.forEach(function(item){
-			   var option = document.createElement('option');
-			   option.value = item;
-			   firstWordList.appendChild(option);
-			});
-
-			lifestyle.concat(hobbies).forEach(function(item){
-			   var option = document.createElement('option');
-			   option.value = item;
-			   secondWordList.appendChild(option);
-			});
+            switch(lang){
+                case 'gb':
+                    document.getElementById("firstWordInput").value = "HOT";
+                    document.getElementById("secondWordInput").value = "CHORES";
+                    conditions = conditions_en;
+                    lifestyle = lifestyle_en;
+                    hobbies = hobbies_en;
+                    break;
+                case 'jp':
+                    document.getElementById("firstWordInput").value = "あつい";
+                    document.getElementById("secondWordInput").value = "アルバイト";
+                    conditions = conditions_jp;
+                    lifestyle = lifestyle_jp;
+                    hobbies = hobbies_jp;
+                    break;
+                case 'fr':
+                    document.getElementById("firstWordInput").value = "CHAUD";
+                    document.getElementById("secondWordInput").value = "ROUTINE";
+                    conditions = conditions_fr;
+                    lifestyle = lifestyle_fr;
+                    hobbies = hobbies_fr;
+                    break;
+                case 'de':
+                    document.getElementById("firstWordInput").value = "HEISS";
+                    document.getElementById("secondWordInput").value = "PFLICHTEN";
+                    conditions = conditions_de;
+                    lifestyle = lifestyle_de;
+                    hobbies = hobbies_de;
+                    break;
+                case 'it':
+                    document.getElementById("firstWordInput").value = "ALTRUISMO";
+                    document.getElementById("secondWordInput").value = "COMPITI";
+                    conditions = conditions_it;
+                    lifestyle = lifestyle_it;
+                    hobbies = hobbies_it;
+                    break;
+                case 'es':
+                    document.getElementById("firstWordInput").value = "BONDADOSO";
+                    document.getElementById("secondWordInput").value = "RUTINA";
+                    conditions = conditions_es;
+                    lifestyle = lifestyle_es;
+                    hobbies = hobbies_es;
+                    break;
+            }
+
+            firstWordList.innerHTML = '';
+            secondWordList.innerHTML = '';
+
+            conditions.forEach(function(item){
+               var option = document.createElement('option');
+               option.value = item;
+               firstWordList.appendChild(option);
+            });
+
+            lifestyle.concat(hobbies).forEach(function(item){
+               var option = document.createElement('option');
+               option.value = item;
+               secondWordList.appendChild(option);
+            });
 
-			validateInput();
+            validateInput();
 
-		}
+        }
 
-		loadWords(lang);
-
-		var unreachable_tiles = [105, 119, 144, 296, 297, 298];
+        loadWords(lang);
+
+        var unreachable_tiles = [105, 119, 144, 296, 297, 298];
 
-		var generated = false;
-
-		var color0 = "#E34234";
-		var color1 = "#FFD700";
-		var color2 = "#0BDA51";
-
-		$('#colorPicker0').on('change', function (e) {
-			var optionSelected = $("option:selected", this);
-			var valueSelected = this.value;
-			$("#square0").css("background", valueSelected);
-
-			color0 = valueSelected;
-			calculate_if_generated();
-
-		});
-
-
-		$('#colorPicker1').on('change', function (e) {
-			var optionSelected = $("option:selected", this);
-			var valueSelected = this.value;
-			$("#square1").css("background", valueSelected);
-
-			color1 = valueSelected;
-			calculate_if_generated();
-
-		});
-
-		$('#colorPicker2').on('change', function (e) {
-			var optionSelected = $("option:selected", this);
-			var valueSelected = this.value;
-			$("#square2").css("background", valueSelected);
-
-			color2 = valueSelected;
-			calculate_if_generated();
-
-		});
-
-		// LCRNG algorithm
-		function next(seed, n = 1, feebas = false){
-			let rng = BigInt(seed);
-			let mult = BigInt(1103515245);
-			let add = feebas ? BigInt(12345) : BigInt(24691);
-
-			for (let i = 0; i < n; i++) {
-				rng = BigInt(mult * rng + add) & BigInt(0xFFFFFFFF);
-			}
-			return rng;
-		}
-
-		/*  Advances the PRNG state until after the Trainer ID was generated to prevent false
-		    positives because the Dewford trend is only generated shortly after the Trainer ID */
-		function advanceToTID(seed, tid){
-			seed = BigInt(seed);
-			while(seed >> BigInt(16) != tid){
-				seed = next(seed);
-			}
-			return seed;
-		}
-
-		/*  Advances the PRNG state until after the minimum possible amount of advances after the dialogue
-		    with Professor Birch to prevent false positives because the Dewford trend is generated during 
-		    the shrinking animation just before teleporting inside the truck */
-		function skipImpossibleAdvances(seed){
-			seed = BigInt(seed);
-			for(var i = 0; i < 700; i++){
-				seed = next(seed);
-			}
-			return seed;
-		}
-
-		/*  Search for the first appearence of the combination of both words of the Dewford trend and return the
-		    16Bit High value 7 advances after that which is usually the Feebas Random Value. Due to the varying
-		    vblank interval, sometimes the Feebas Random Value is generated 6 or 8 advances after the first word
-		    of the Dewford trend. These are proposed as alternative values  */
-		function getFeebasRands(seed, word1, word2, is_emerald, tid){
-
-			var first_word_index = conditions.indexOf(word1);     // The first word is always from the group conditions
-
-			var second_word_from_group_lifestyle = 0; // The second word can be either from lifestyle or hobbies
-
-			if(lifestyle.includes(word2)){
-				second_word_from_group_lifestyle = 1;
-				var second_word_index = lifestyle.indexOf(word2);
-			}
-			else{
-				var second_word_index = hobbies.indexOf(word2);
-			}
-
-			seed = is_emerald ? skipImpossibleAdvances(seed) : advanceToTID(seed, tid);
-
-			feebasRands = [];
-
-			while(feebasRands.length < 3){ // Loop that finds three consecutive RNG calls that match the given words
-				seed = next(seed);
-				if((seed >> BigInt(16)) % BigInt(69) == first_word_index){ // Found match for first word index
-			      
-					if(((next(seed) >> BigInt(16)) & BigInt(1)) == second_word_from_group_lifestyle){ // Found match for group of second word
-						var elements_in_second_group = second_word_from_group_lifestyle ? 45 : 54;
-
-						if((next(seed,2) >> BigInt(16)) % BigInt(elements_in_second_group) == second_word_index){ // Found match for second word index
-							var numAdvances;
-							if((next(seed,4) >> BigInt(16)) % BigInt(98) > 50){
-
-								// Additional Advances for trendiness values
-								if((next(seed,5) >> BigInt(16)) % BigInt(98) > 80){
-									numAdvances = 8;
-								}
-								else{
-									numAdvances = 7;
-								}
-							}
-							else{
-								numAdvances = 6;
-							}
-							
-							feebasRands.push(next(seed,numAdvances) >> BigInt(16));
-							//return [next(seed,numAdvances) >> BigInt(16), next(seed,numAdvances+1) >> BigInt(16), next(seed,numAdvances-1) >> BigInt(16)]; // Return possible Feebas Random Values
-			          }
-			      }
-			  }
-			}
-
-			return feebasRands;
-		}
-
-
-		/*  Calculate the Feebas Tiles based on the Feebas Random Value.
-		    Tile 0 gets reassigned to tile 447 and tiles 1 to 3 are ignored */
-		function getFeebasTiles(seed){
-
-			tiles_list = [];
-			tiles_found = 0;
-
-			while(tiles_found < 6){
-			  seed = next(seed, 1, feebas = true);
-			  tile = (seed >> BigInt(16)) % BigInt(0x1bf);
-
-			  if(tile == 0) tile = 447;
-
-			  if(tile < 4) continue;
-
-			  if(unreachable_tiles.includes(Number(tile))){
-			  	tiles_found += 1;
-			  	continue;
-			  }
-
-			  tiles_list.push(Number(tile));
-			  tiles_found += 1;
-			}
-			return tiles_list;
-		}
-
-		const canvas = document.getElementById("overlayCanvas");
+        var generated = false;
+
+        var color0 = "#E34234";
+        var color1 = "#FFD700";
+        var color2 = "#0BDA51";
+
+        $('#colorPicker0').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            $("#square0").css("background", valueSelected);
+
+            color0 = valueSelected;
+            calculate_if_generated();
+
+        });
+
+
+        $('#colorPicker1').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            $("#square1").css("background", valueSelected);
+
+            color1 = valueSelected;
+            calculate_if_generated();
+
+        });
+
+        $('#colorPicker2').on('change', function (e) {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            $("#square2").css("background", valueSelected);
+
+            color2 = valueSelected;
+            calculate_if_generated();
+
+        });
+
+        // LCRNG algorithm
+        function next(seed, n = 1, feebas = false){
+            let rng = BigInt(seed);
+            let mult = BigInt(1103515245);
+            let add = feebas ? BigInt(12345) : BigInt(24691);
+
+            for (let i = 0; i < n; i++) {
+                rng = BigInt(mult * rng + add) & BigInt(0xFFFFFFFF);
+            }
+            return rng;
+        }
+
+        /*  Advances the PRNG state until after the Trainer ID was generated to prevent false
+            positives because the Dewford trend is only generated shortly after the Trainer ID */
+        function advanceToTID(seed, tid){
+            seed = BigInt(seed);
+            while(seed >> BigInt(16) != tid){
+                seed = next(seed);
+            }
+            return seed;
+        }
+
+        /*  Advances the PRNG state until after the minimum possible amount of advances after the dialogue
+            with Professor Birch to prevent false positives because the Dewford trend is generated during 
+            the shrinking animation just before teleporting inside the truck */
+        function skipImpossibleAdvances(seed){
+            seed = BigInt(seed);
+            for(var i = 0; i < 700; i++){
+                seed = next(seed);
+            }
+            return seed;
+        }
+
+        /*  Search for the first appearence of the combination of both words of the Dewford trend and return the
+            16Bit High value 7 advances after that which is usually the Feebas Random Value. Due to the varying
+            vblank interval, sometimes the Feebas Random Value is generated 6 or 8 advances after the first word
+            of the Dewford trend. These are proposed as alternative values  */
+        function getFeebasRands(seed, word1, word2, is_emerald, tid){
+
+            var first_word_index = conditions.indexOf(word1);     // The first word is always from the group conditions
+
+            var second_word_from_group_lifestyle = 0; // The second word can be either from lifestyle or hobbies
+
+            if(lifestyle.includes(word2)){
+                second_word_from_group_lifestyle = 1;
+                var second_word_index = lifestyle.indexOf(word2);
+            }
+            else{
+                var second_word_index = hobbies.indexOf(word2);
+            }
+
+            seed = is_emerald ? skipImpossibleAdvances(seed) : advanceToTID(seed, tid);
+
+            feebasRands = [];
+
+            while(feebasRands.length < 3){ // Loop that finds three consecutive RNG calls that match the given words
+                seed = next(seed);
+                if((seed >> BigInt(16)) % BigInt(69) == first_word_index){ // Found match for first word index
+                  
+                    if(((next(seed) >> BigInt(16)) & BigInt(1)) == second_word_from_group_lifestyle){ // Found match for group of second word
+                        var elements_in_second_group = second_word_from_group_lifestyle ? 45 : 54;
+
+                        if((next(seed,2) >> BigInt(16)) % BigInt(elements_in_second_group) == second_word_index){ // Found match for second word index
+                            var numAdvances;
+                            if((next(seed,4) >> BigInt(16)) % BigInt(98) > 50){
+
+                                // Additional Advances for trendiness values
+                                if((next(seed,5) >> BigInt(16)) % BigInt(98) > 80){
+                                    numAdvances = 8;
+                                }
+                                else{
+                                    numAdvances = 7;
+                                }
+                            }
+                            else{
+                                numAdvances = 6;
+                            }
+                            
+                            feebasRands.push(next(seed,numAdvances) >> BigInt(16));
+                            //return [next(seed,numAdvances) >> BigInt(16), next(seed,numAdvances+1) >> BigInt(16), next(seed,numAdvances-1) >> BigInt(16)]; // Return possible Feebas Random Values
+                      }
+                  }
+              }
+            }
+
+            return feebasRands;
+        }
+
+
+        /*  Calculate the Feebas Tiles based on the Feebas Random Value.
+            Tile 0 gets reassigned to tile 447 and tiles 1 to 3 are ignored */
+        function getFeebasTiles(seed){
+
+            tiles_list = [];
+            tiles_found = 0;
+
+            while(tiles_found < 6){
+              seed = next(seed, 1, feebas = true);
+              tile = (seed >> BigInt(16)) % BigInt(0x1bf);
+
+              if(tile == 0) tile = 447;
+
+              if(tile < 4) continue;
+
+              if(unreachable_tiles.includes(Number(tile))){
+                  tiles_found += 1;
+                  continue;
+              }
+
+              tiles_list.push(Number(tile));
+              tiles_found += 1;
+            }
+            return tiles_list;
+        }
+
+        const canvas = document.getElementById("overlayCanvas");
         const context = canvas.getContext("2d");
 
         function colorPixels(tileCoords, color) {
             context.fillStyle = color;//"rgba(255, 0, 0, 1)";
             if(tileCoords[0] == 369 && tileCoords[1] == 465){
-            	context.fillRect(257, 257, 79, 31);
-            	return;
+                context.fillRect(257, 257, 79, 31);
+                return;
             }
             context.fillRect(tileCoords[0], tileCoords[1], 15, 15);
         }
 
         function colorPixelsSplitTwo(tileCoords, color0, color1) {
-        	if(tileCoords[0] == 369 && tileCoords[1] == 465){
-        		context.fillStyle = "black";
-        		context.fillRect(257, 257, 79, 31);
-        		for(var i = 0; i < 5; i++){
-        			var x = 257 + 16*i;
-        			context.fillStyle = color0;
-		            context.fillRect(x, 257, 7, 31);
-		            context.fillStyle = color1;
-		            context.fillRect(x+8, 257, 7, 31);
-        		}
-        		context.fillStyle = "black";
-	            context.fillRect(257, 272, 79, 1);
-            	return;
+            if(tileCoords[0] == 369 && tileCoords[1] == 465){
+                context.fillStyle = "black";
+                context.fillRect(257, 257, 79, 31);
+                for(var i = 0; i < 5; i++){
+                    var x = 257 + 16*i;
+                    context.fillStyle = color0;
+                    context.fillRect(x, 257, 7, 31);
+                    context.fillStyle = color1;
+                    context.fillRect(x+8, 257, 7, 31);
+                }
+                context.fillStyle = "black";
+                context.fillRect(257, 272, 79, 1);
+                return;
             }
             context.fillStyle = color0;
             context.fillRect(tileCoords[0], tileCoords[1], 7, 15);
@@ -701,31 +701,31 @@
         }
 
         function colorPixelsSplitThree(tileCoords, color0, color1, color2) {
-        	var bridgeCoords = 257
-        	if(tileCoords[0] == 369 && tileCoords[1] == 465){
-        		context.fillStyle = "black";
-	            context.fillRect(bridgeCoords, bridgeCoords, 79, 31);
-	            context.fillStyle = color0;
-	            context.fillRect(bridgeCoords, bridgeCoords, 79, 4);
+            var bridgeCoords = 257
+            if(tileCoords[0] == 369 && tileCoords[1] == 465){
+                context.fillStyle = "black";
+                context.fillRect(bridgeCoords, bridgeCoords, 79, 31);
+                context.fillStyle = color0;
+                context.fillRect(bridgeCoords, bridgeCoords, 79, 4);
 
-	            for(var i = 0; i < 5; i++){
-	            	context.fillRect(5+bridgeCoords+5*i, 4+bridgeCoords+2*i, 69-(10*i), 2);
-	            }
+                for(var i = 0; i < 5; i++){
+                    context.fillRect(5+bridgeCoords+5*i, 4+bridgeCoords+2*i, 69-(10*i), 2);
+                }
 
-	            context.fillStyle = color1;
-	            context.fillRect(bridgeCoords, bridgeCoords+16, 38, 15);
+                context.fillStyle = color1;
+                context.fillRect(bridgeCoords, bridgeCoords+16, 38, 15);
 
-	            for(var i = 0; i < 5; i++){
-	            	context.fillRect(bridgeCoords, 6+bridgeCoords+2*i, 5+5*i, 2);
-	            }
+                for(var i = 0; i < 5; i++){
+                    context.fillRect(bridgeCoords, 6+bridgeCoords+2*i, 5+5*i, 2);
+                }
 
-	            context.fillStyle = color2;
-	            context.fillRect(bridgeCoords+41, bridgeCoords+16, 38, 15);
+                context.fillStyle = color2;
+                context.fillRect(bridgeCoords+41, bridgeCoords+16, 38, 15);
 
-	            for(var i = 0; i < 5; i++){
-	            	context.fillRect(bridgeCoords+74-5*i, 6+bridgeCoords+2*i, 5+5*i, 2);
-	            }
-	            return;
+                for(var i = 0; i < 5; i++){
+                    context.fillRect(bridgeCoords+74-5*i, 6+bridgeCoords+2*i, 5+5*i, 2);
+                }
+                return;
             }
 
             context.fillStyle = "black";
@@ -734,39 +734,39 @@
             context.fillRect(tileCoords[0], tileCoords[1], 15, 2);
 
             for(var i = 0; i < 5; i++){
-            	context.fillRect(1+tileCoords[0]+i, 2+tileCoords[1]+i, 13-(2*i), 1);
+                context.fillRect(1+tileCoords[0]+i, 2+tileCoords[1]+i, 13-(2*i), 1);
             }
 
             context.fillStyle = color1;
             context.fillRect(tileCoords[0], tileCoords[1]+8, 7, 7);
 
             for(var i = 0; i < 5; i++){
-            	context.fillRect(tileCoords[0], 3+tileCoords[1]+i, 1+i, 1);
+                context.fillRect(tileCoords[0], 3+tileCoords[1]+i, 1+i, 1);
             }
 
             context.fillStyle = color2;
             context.fillRect(tileCoords[0]+8, tileCoords[1]+8, 7, 7);
 
             for(var i = 0; i < 5; i++){
-            	context.fillRect(tileCoords[0]+14-i, 3+tileCoords[1]+i, 1+i, 1);
+                context.fillRect(tileCoords[0]+14-i, 3+tileCoords[1]+i, 1+i, 1);
             }
 
         }
 
         function colorTiles(tilesList, color0, color1, color2, overlaps){
-        	const canvas = document.getElementById("overlayCanvas");
-        	const context = canvas.getContext("2d");
-        	switch(Number(overlaps)){
-        		case 0:
-        			tilesList.forEach((element) => colorPixels(tileCoordinates[element], color0));
-        			break;
-        		case 1:
-        			tilesList.forEach((element) => colorPixelsSplitTwo(tileCoordinates[element], color0, color1));
-        			break;
-        		case 2:
-        			tilesList.forEach((element) => colorPixelsSplitThree(tileCoordinates[element], color0, color1, color2));
-        			break;
-        	}
+            const canvas = document.getElementById("overlayCanvas");
+            const context = canvas.getContext("2d");
+            switch(Number(overlaps)){
+                case 0:
+                    tilesList.forEach((element) => colorPixels(tileCoordinates[element], color0));
+                    break;
+                case 1:
+                    tilesList.forEach((element) => colorPixelsSplitTwo(tileCoordinates[element], color0, color1));
+                    break;
+                case 2:
+                    tilesList.forEach((element) => colorPixelsSplitThree(tileCoordinates[element], color0, color1, color2));
+                    break;
+            }
         }
 
         function validateInput() {
@@ -777,23 +777,23 @@
             var valid = true;
 
             if(tid < 0 || tid > 65535){
-            	valid = false;
+                valid = false;
             }
 
             if (!conditions.includes(firstWord)) {
-            	document.getElementById("firstWordInput").setCustomValidity("invalid");
+                document.getElementById("firstWordInput").setCustomValidity("invalid");
                 valid = false;
             }
             else{
-            	document.getElementById("firstWordInput").setCustomValidity("");
+                document.getElementById("firstWordInput").setCustomValidity("");
             }
 
             if(!lifestyle.concat(hobbies).includes(secondWord)){
-            	document.getElementById("secondWordInput").setCustomValidity("invalid");
-            	valid = false;
+                document.getElementById("secondWordInput").setCustomValidity("invalid");
+                valid = false;
             }
             else{
-            	document.getElementById("secondWordInput").setCustomValidity("");
+                document.getElementById("secondWordInput").setCustomValidity("");
             }
 
             return valid;
@@ -802,86 +802,86 @@
 
         function calculate() {
 
-        	if(!validateInput()){
-        		return;
-        	}
+            if(!validateInput()){
+                return;
+            }
 
-        	const context = canvas.getContext('2d');
-			context.clearRect(0, 0, canvas.width, canvas.height);
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
             var is_emerald = document.getElementById("gameOption").value;
 
-			is_emerald = (is_emerald == 'Emerald') ? 1 : 0;
+            is_emerald = (is_emerald == 'Emerald') ? 1 : 0;
 
-			var tid = document.getElementById("trainerID").value;
-			var seed = is_emerald ? tid : 0x5a0;
-			var word1 = document.getElementById("firstWordInput").value.toUpperCase();
-			var word2 = document.getElementById("secondWordInput").value.toUpperCase();
+            var tid = document.getElementById("trainerID").value;
+            var seed = is_emerald ? tid : 0x5a0;
+            var word1 = document.getElementById("firstWordInput").value.toUpperCase();
+            var word2 = document.getElementById("secondWordInput").value.toUpperCase();
 
-			var showResult0 = +document.getElementById("result0Checkbox").checked;
-			var showResult1 = +document.getElementById("result1Checkbox").checked;
-			var showResult2 = +document.getElementById("result2Checkbox").checked;
+            var showResult0 = +document.getElementById("result0Checkbox").checked;
+            var showResult1 = +document.getElementById("result1Checkbox").checked;
+            var showResult2 = +document.getElementById("result2Checkbox").checked;
 
-			feeb_rands = getFeebasRands(seed, word1, word2, is_emerald, tid);
+            feeb_rands = getFeebasRands(seed, word1, word2, is_emerald, tid);
 
-			var tiles = [ getFeebasTiles(feeb_rands[0]),
-			            getFeebasTiles(feeb_rands[1]),
-			            getFeebasTiles(feeb_rands[2])];
+            var tiles = [ getFeebasTiles(feeb_rands[0]),
+                        getFeebasTiles(feeb_rands[1]),
+                        getFeebasTiles(feeb_rands[2])];
 
             overlap01 = [];
-			overlap12 = [];
-			overlap02 = [];
-			overlap012 = [];
+            overlap12 = [];
+            overlap02 = [];
+            overlap012 = [];
 
-			tiles[0].forEach((element) => tiles[1].includes(element) ? overlap01.push(element) : null);
-			tiles[1].forEach((element) => tiles[2].includes(element) ? overlap12.push(element) : null);
-			tiles[0].forEach((element) => tiles[2].includes(element) ? overlap02.push(element) : null);
-			overlap01.forEach((element) => overlap12.includes(element) ? overlap012.push(element) : null);
+            tiles[0].forEach((element) => tiles[1].includes(element) ? overlap01.push(element) : null);
+            tiles[1].forEach((element) => tiles[2].includes(element) ? overlap12.push(element) : null);
+            tiles[0].forEach((element) => tiles[2].includes(element) ? overlap02.push(element) : null);
+            overlap01.forEach((element) => overlap12.includes(element) ? overlap012.push(element) : null);
 
-			if(showResult0) colorTiles(tiles[0], color0, null, null, 0);
-			if(showResult1) colorTiles(tiles[1], color1, null, null, 0);
-			if(showResult2) colorTiles(tiles[2], color2, null, null, 0);
-			if(showResult0 && showResult1) colorTiles(overlap01, color0, color1, null, 1);
-			if(showResult1 && showResult2) colorTiles(overlap12, color1, color2, null, 1);
-			if(showResult0 && showResult2) colorTiles(overlap02, color0, color2, null, 1);
-			if(showResult0 && showResult1 && showResult2) colorTiles(overlap012, color0, color1, color2, 2);
+            if(showResult0) colorTiles(tiles[0], color0, null, null, 0);
+            if(showResult1) colorTiles(tiles[1], color1, null, null, 0);
+            if(showResult2) colorTiles(tiles[2], color2, null, null, 0);
+            if(showResult0 && showResult1) colorTiles(overlap01, color0, color1, null, 1);
+            if(showResult1 && showResult2) colorTiles(overlap12, color1, color2, null, 1);
+            if(showResult0 && showResult2) colorTiles(overlap02, color0, color2, null, 1);
+            if(showResult0 && showResult1 && showResult2) colorTiles(overlap012, color0, color1, color2, 2);
 
-			document.getElementById("result0").innerHTML = feeb_rands[0].toString(16).toUpperCase();
-			document.getElementById("result1").innerHTML = feeb_rands[1].toString(16).toUpperCase();
-			document.getElementById("result2").innerHTML = feeb_rands[2].toString(16).toUpperCase();
+            document.getElementById("result0").innerHTML = feeb_rands[0].toString(16).toUpperCase();
+            document.getElementById("result1").innerHTML = feeb_rands[1].toString(16).toUpperCase();
+            document.getElementById("result2").innerHTML = feeb_rands[2].toString(16).toUpperCase();
 
-			generated = true;
+            generated = true;
         }
 
         function calculate_if_generated(){
-        	if(generated){
-        		calculate();
-        	}
+            if(generated){
+                calculate();
+            }
         }
 
         window.onscroll = function () {
-        	toggleGoToTopButton();
-	    };
+            toggleGoToTopButton();
+        };
 
-	    function toggleGoToTopButton() {
-	        const goToTopBtn = document.getElementById('goToTopBtn');
-	        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-	            goToTopBtn.style.display = 'block';
-	        } else {
-	            goToTopBtn.style.display = 'none';
-	        }
-	    }
+        function toggleGoToTopButton() {
+            const goToTopBtn = document.getElementById('goToTopBtn');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                goToTopBtn.style.display = 'block';
+            } else {
+                goToTopBtn.style.display = 'none';
+            }
+        }
 
-	    function goToTop() {
-	        document.body.scrollTop = 0;
-	        document.documentElement.scrollTop = 0;
-	    }
+        function goToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
 
-	    $(".dropdown-item").on("click",(function(){
-        	var lang = $(this).attr('id');
+        $(".dropdown-item").on("click",(function(){
+            var lang = $(this).attr('id');
             $("#defaultIcon").removeClass($("#defaultIcon").attr('class'));
             $("#defaultIcon").addClass("flag-icon flag-icon-" + lang);
             loadWords(lang);
-      	}));
+          }));
 
     </script>
 </body>
