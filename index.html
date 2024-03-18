@@ -447,43 +447,31 @@
 
             switch(lang){
                 case 'gb':
-                    document.getElementById("firstWordInput").value = "HOT";
-                    document.getElementById("secondWordInput").value = "CHORES";
                     conditions = conditions_en;
                     lifestyle = lifestyle_en;
                     hobbies = hobbies_en;
                     break;
                 case 'jp':
-                    document.getElementById("firstWordInput").value = "あつい";
-                    document.getElementById("secondWordInput").value = "アルバイト";
                     conditions = conditions_jp;
                     lifestyle = lifestyle_jp;
                     hobbies = hobbies_jp;
                     break;
                 case 'fr':
-                    document.getElementById("firstWordInput").value = "CHAUD";
-                    document.getElementById("secondWordInput").value = "ROUTINE";
                     conditions = conditions_fr;
                     lifestyle = lifestyle_fr;
                     hobbies = hobbies_fr;
                     break;
                 case 'de':
-                    document.getElementById("firstWordInput").value = "HEISS";
-                    document.getElementById("secondWordInput").value = "PFLICHTEN";
                     conditions = conditions_de;
                     lifestyle = lifestyle_de;
                     hobbies = hobbies_de;
                     break;
                 case 'it':
-                    document.getElementById("firstWordInput").value = "ALTRUISMO";
-                    document.getElementById("secondWordInput").value = "COMPITI";
                     conditions = conditions_it;
                     lifestyle = lifestyle_it;
                     hobbies = hobbies_it;
                     break;
                 case 'es':
-                    document.getElementById("firstWordInput").value = "BONDADOSO";
-                    document.getElementById("secondWordInput").value = "RUTINA";
                     conditions = conditions_es;
                     lifestyle = lifestyle_es;
                     hobbies = hobbies_es;
@@ -492,6 +480,9 @@
 
             firstWordList.innerHTML = '';
             secondWordList.innerHTML = '';
+
+            document.getElementById("firstWordInput").value = conditions[0];
+            document.getElementById("secondWordInput").value = lifestyle[0];
 
             conditions.forEach(function(item){
                var option = document.createElement('option');
@@ -613,10 +604,10 @@
                         var elements_in_second_group = second_word_from_group_lifestyle ? 45 : 54;
 
                         if((next(seed,2) >> BigInt(16)) % BigInt(elements_in_second_group) == second_word_index){ // Found match for second word index
-                            var numAdvances;
+
+                            var numAdvances; // Additional Advances for trendiness values
                             if((next(seed,4) >> BigInt(16)) % BigInt(98) > 50){
 
-                                // Additional Advances for trendiness values
                                 if((next(seed,5) >> BigInt(16)) % BigInt(98) > 80){
                                     numAdvances = 8;
                                 }
@@ -629,7 +620,6 @@
                             }
                             
                             feebasRands.push(next(seed,numAdvances) >> BigInt(16));
-                            //return [next(seed,numAdvances) >> BigInt(16), next(seed,numAdvances+1) >> BigInt(16), next(seed,numAdvances-1) >> BigInt(16)]; // Return possible Feebas Random Values
                       }
                   }
               }
@@ -669,7 +659,7 @@
         const context = canvas.getContext("2d");
 
         function colorPixels(tileCoords, color) {
-            context.fillStyle = color;//"rgba(255, 0, 0, 1)";
+            context.fillStyle = color;
             if(tileCoords[0] == 369 && tileCoords[1] == 465){
                 context.fillRect(257, 257, 79, 31);
                 return;
@@ -881,7 +871,7 @@
             $("#defaultIcon").removeClass($("#defaultIcon").attr('class'));
             $("#defaultIcon").addClass("flag-icon flag-icon-" + lang);
             loadWords(lang);
-          }));
+        }));
 
     </script>
 </body>
