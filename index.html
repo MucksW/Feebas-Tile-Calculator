@@ -225,10 +225,10 @@
         td .dropdown {
             position: absolute;
             right: 7px;
-            top: 7px;
+            top: 3px;
         }
 
-        td .dropdown .dropdown-toggle{
+        td .dropdown .wrapper{
             padding: 7px;
             background: rgba(208,208,208,1);
         }
@@ -237,6 +237,13 @@
             background: rgba(208,208,208,0.7);
         }
 
+        #defaultIcon {
+            padding: 2px 19px;
+        }
+
+        .dropdown-item {
+            padding: 4px 15px;
+        }
 
     </style>
 </head>
@@ -269,9 +276,9 @@
                     <td><input type="number" id="trainerID" name="trainerID" placeholder="00000" min="0" max="65535"></td>
                 </tr>
                 <tr>
-                    <td colspan="2" ><label style="font-weight:bold;">Dewford Trend</label>
+                    <td colspan="2" ><span style="font-weight:bold;">Dewford Trend</span>
                         <div class="dropdown">  
-                            <button type="button" class="dropdown-toggle" data-toggle="dropdown">  
+                            <button type="button" class="wrapper" data-toggle="dropdown">  
                                 <a id="defaultIcon" class="flag-icon flag-icon-gb"></a>
                             </button>  
                             <div class="dropdown-menu">  
