@@ -56,6 +56,18 @@
             cursor: pointer;
         }
 
+        #kofiBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 80px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         #goToTopBtn:hover {
             background-color: #45a049;
         }
@@ -337,6 +349,16 @@
 
   </div>
 </div>
+
+<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+<script>
+  kofiWidgetOverlay.draw('mucks', {
+    'type': 'floating-chat',
+    'floating-chat.donateButton.text': 'Support me',
+    'floating-chat.donateButton.background-color': '#4CAF50',
+    'floating-chat.donateButton.text-color': '#fff'
+  });
+</script>
 
 <button id="goToTopBtn" onclick="goToTop()">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
