@@ -1,0 +1,244 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    background-color: #f4f4f4;
+    margin: 20px;
+}
+
+#disclaimer {
+  background-color: #ffffcc;
+  border-left: 6px solid #ffeb3b;
+  padding: 4px 12px;
+  text-align: justify;
+}
+
+#imageContainer {
+    width:641px;
+      height:1553px;
+      margin-bottom: 20px;
+}
+
+#routeImage {
+    position: absolute;
+    display: block;
+    width:641px;
+      height:1553px;
+}
+
+#overlayCanvas {
+    position: absolute;
+}
+
+#goToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#kofiBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 80px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#goToTopBtn:hover {
+    background-color: #45a049;
+}
+
+#goToTopBtn svg {
+  width: 30px;
+  height: 30px;
+  fill: #4CAF50;
+  vertical-align: middle;
+}
+
+html, body {
+  scroll-behavior: smooth;
+}
+
+#calcButton{
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    position: relative;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+input, select {
+    text-align: center;
+}
+
+input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="text"], input[type="number"], select, .selection, input[type="checkbox"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+    width: auto;
+}
+
+#resultContainer th, #resultContainer td {
+    padding: 5px;
+}
+
+#resultContainer {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+#square0 {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+    height: 16px;
+    width: 16px;
+    background: #E34234;
+}
+
+#square1 {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+    height: 16px;
+    width: 16px;
+    background: #FFD700;
+}
+
+#square2 {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+    height: 16px;
+    width: 16px;
+    background: #0BDA51;
+}
+
+#resultContainer td {
+    font-family: Consolas;
+}
+
+.colorPicker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+input:invalid {
+    border: 2px solid red;
+    outline: none;
+}
+
+.info {
+    position:relative;
+    cursor: help;
+    color: blue;
+}
+
+.info span {
+    display:none;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    color:black;
+    background:white;
+
+}
+
+.info span img {
+    float:left;
+}
+
+.info:hover span, .info:active span {
+    display : block;
+    position : absolute;
+    top : 0;
+    left : 0;
+    z-index : 1;
+    border : 1px solid black;
+    margin-top : 12px;
+    margin-left : 12px;
+    padding : 4px;
+}
+
+.dropdown-menu{
+    min-width: 0px; 
+}
+
+td .dropdown {
+    position: absolute;
+    right: 7px;
+    top: 3px;
+}
+
+td .dropdown .wrapper{
+    padding: 7px;
+    background: rgba(208,208,208,1);
+}
+
+td .dropdown .dropdown-menu{
+    background: rgba(208,208,208,0.7);
+}
+
+#defaultIcon {
+    padding: 2px 19px;
+}
+
+.dropdown-item {
+    padding: 4px 15px;
+}
