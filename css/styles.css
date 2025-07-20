@@ -121,15 +121,19 @@ input[type="text"], input[type="number"], select, .selection, input[type="checkb
     box-sizing: border-box;
 }
 
+#customSeed {
+    padding: 0px;
+}
+
 input[type="checkbox"] {
     width: auto;
 }
 
-#resultContainer th, #resultContainer td {
+.resultTable th, .resultTable td {
     padding: 5px;
 }
 
-#resultContainer {
+.resultTable {
     flex: 1;
     background-color: #fff;
     padding: 20px;
@@ -138,34 +142,20 @@ input[type="checkbox"] {
     margin-bottom: 20px;
 }
 
-#square0 {
+.resultTable input[type="text"]{
+    max-width: 60px;
+}
+
+
+.square {
     position: relative;
     display: inline-block;
     border: 1px solid black;
     height: 16px;
     width: 16px;
-    background: #E34234;
 }
 
-#square1 {
-    position: relative;
-    display: inline-block;
-    border: 1px solid black;
-    height: 16px;
-    width: 16px;
-    background: #FFD700;
-}
-
-#square2 {
-    position: relative;
-    display: inline-block;
-    border: 1px solid black;
-    height: 16px;
-    width: 16px;
-    background: #0BDA51;
-}
-
-#resultContainer td {
+.resultTable td {
     font-family: Consolas;
 }
 
@@ -196,8 +186,9 @@ input:invalid {
     -webkit-border-radius:6px;
     border-radius:6px;
     color:black;
-    background:white;
-
+    background: #f4f4f4;
+    max-width: 400px;
+    width: max-content;
 }
 
 .info span img {
@@ -241,4 +232,22 @@ td .dropdown .dropdown-menu{
 
 .dropdown-item {
     padding: 4px 15px;
+}
+
+button:disabled {
+    background-color: #cccccc !important; /* Wichtig, um Bootstrap zu überschreiben */
+    border-color: #cccccc !important;
+    cursor: not-allowed;
+}
+
+tr .buttonWrapper {
+    position: absolute;
+    right: 7px;
+    top: 3px;
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
 }
