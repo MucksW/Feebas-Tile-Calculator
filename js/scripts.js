@@ -12,10 +12,17 @@ const context = canvas.getContext("2d");
 
 let unreachable_tiles = [105, 119, 144, 296, 297, 298];
 
-let color0 = "#E34234";
-let color1 = "#FFD700";
-let color2 = "#0BDA51";
+let colorStorage = {};
 
+let addedTrendsCount = 0;
+const maxTrends = 4;
+updateOtherTrendsBox();
+
+let firstColors = ["#E34234", "#FFD700", "#0BDA51", "#A040A0", "#60A020"];
+let numberOfResults = 3;
+
+var customSeed = "";
+var customSeedChecked = false;
 
 // Functions
 function loadWords(lang){
@@ -32,8 +39,13 @@ function loadWords(lang){
     firstWordList.innerHTML = '';
     secondWordList.innerHTML = '';
 
-    document.getElementById("firstWordInput").value = conditions[0];
-    document.getElementById("secondWordInput").value = lifestyle[0];
+    $(".fw").each(function() {
+        $(this).val(conditions[0]);
+    });
+    $(".sw").each(function() {
+        $(this).val(lifestyle[0]);
+    });
+    
 
     conditions.forEach(function(item){
        var option = document.createElement('option');
@@ -53,34 +65,21 @@ function loadWords(lang){
 
 loadWords(lang);
 
-$('#colorPicker0').on('change', function (e) {
-    var optionSelected = $("option:selected", this);
-    var valueSelected = this.value;
-    $("#square0").css("background", valueSelected);
+// Change color of generated tiles and update in storage
+$('.resultTable tbody').on('change', '.colorPicker', function() {
+    
+    const changedPicker = $(this);
+    const newColor = changedPicker.val();
 
-    color0 = valueSelected;
+    const colorSquare = changedPicker.parent('div');
+    colorSquare.css('background', newColor);
+    
+    const resultKey = changedPicker.closest('.square').attr("id")[0];
+
+    colorStorage[resultKey] = newColor;
+
     calculate_if_generated();
-
-});
-
-$('#colorPicker1').on('change', function (e) {
-    var optionSelected = $("option:selected", this);
-    var valueSelected = this.value;
-    $("#square1").css("background", valueSelected);
-
-    color1 = valueSelected;
-    calculate_if_generated();
-
-});
-
-$('#colorPicker2').on('change', function (e) {
-    var optionSelected = $("option:selected", this);
-    var valueSelected = this.value;
-    $("#square2").css("background", valueSelected);
-
-    color2 = valueSelected;
-    calculate_if_generated();
-
+    
 });
 
 // LCRNG algorithm
@@ -116,12 +115,7 @@ function skipImpossibleAdvances(seed){
     return seed;
 }
 
-/*  Search for the first appearence of the combination of both words of the Dewford trend and return the
-    16Bit High value 7 advances after that which is usually the Feebas Random Value. Due to the varying
-    vblank interval, sometimes the Feebas Random Value is generated 6 or 8 advances after the first word
-    of the Dewford trend. These are proposed as alternative values  */
-function getFeebasRands(seed, word1, word2, is_emerald, tid){
-
+function getPhraseArrayFromWords(word1, word2){
     var first_word_index = conditions.indexOf(word1);     // The first word is always from the group conditions
 
     var second_word_from_group_lifestyle = 0; // The second word can be either from lifestyle or hobbies
@@ -134,11 +128,28 @@ function getFeebasRands(seed, word1, word2, is_emerald, tid){
         var second_word_index = hobbies.indexOf(word2);
     }
 
+    return [first_word_index, second_word_from_group_lifestyle, second_word_index];
+}
+
+/*  Search for the first appearence of the combination of both words of the Dewford trend and return the
+    16Bit High value 7 advances after that which is usually the Feebas Random Value. Due to the varying
+    vblank interval, sometimes the Feebas Random Value is generated 6 or 8 advances after the first word
+    of the Dewford trend. These are proposed as alternative values  */
+function getFeebasRands(seed, word1, word2, is_emerald, tid){
+
+    var phraseArray = getPhraseArrayFromWords(word1, word2);
+
+    var first_word_index = phraseArray[0];
+    var second_word_from_group_lifestyle = phraseArray[1];
+    var second_word_index = phraseArray[2];
+
     seed = is_emerald ? skipImpossibleAdvances(seed) : advanceToTID(seed, tid);
 
-    feebasRands = [];
+    let feebasRands = [];
 
-    while(feebasRands.length < 3){ // Loop that finds three consecutive RNG calls that match the given words
+    let numResults = is_emerald ? 5 : 3;
+
+    while(feebasRands.length < numResults){ // Loop that finds three consecutive RNG calls that match the given words
         seed = next(seed);
         if((seed >> BigInt(16)) % BigInt(69) == first_word_index){ // Found match for first word index
           
@@ -162,9 +173,9 @@ function getFeebasRands(seed, word1, word2, is_emerald, tid){
                     }
                     
                     feebasRands.push(next(seed,numAdvances) >> BigInt(16));
-              }
-          }
-      }
+                }
+            }
+        }
     }
 
     return feebasRands;
@@ -175,8 +186,8 @@ function getFeebasRands(seed, word1, word2, is_emerald, tid){
     Tile 0 gets reassigned to tile 447 and tiles 1 to 3 are ignored */
 function getFeebasTiles(seed){
 
-    tiles_list = [];
-    tiles_found = 0;
+    let tiles_list = [];
+    let tiles_found = 0;
 
     while(tiles_found < 6){
       seed = next(seed, 1, feebas = true);
@@ -197,136 +208,231 @@ function getFeebasTiles(seed){
     return tiles_list;
 }
 
-function colorPixels(tileCoords, color) {
+/*  Return the Feebas random value based on a given Dewford
+    Trend and the RNG state when the TID was generated */
+function getFeebasRandFromSeedAndPhrase(seed, word1, word2, step = 2){
+    
+    let phrase = getPhraseArrayFromWords(word1, word2);
+    let first_word_index = phrase[0];
+    let second_word_from_group_lifestyle = phrase[1];
+    let second_word_index = phrase[2];
+
+    seed = next(seed, step);
+    
+    for( let i = 0; i < 5; i++ ){
+        seed = next(seed);
+        
+        var numAdvances; // Additional Advances for trendiness values
+        if((next(seed,4) >> BigInt(16)) % BigInt(98) > 50){
+
+            if((next(seed,5) >> BigInt(16)) % BigInt(98) > 80){
+                numAdvances = 8;
+            }
+            else{
+                numAdvances = 7;
+            }
+        }
+        else{
+            numAdvances = 6;
+        }
+
+        if((seed >> BigInt(16)) % BigInt(69) == first_word_index){ // Found match for first word index
+          
+            if(((next(seed) >> BigInt(16)) & BigInt(1)) == second_word_from_group_lifestyle){ // Found match for group of second word
+                var elements_in_second_group = second_word_from_group_lifestyle ? 45 : 54;
+
+                if((next(seed,2) >> BigInt(16)) % BigInt(elements_in_second_group) == second_word_index){ // Found match for second word index
+                    return next(seed,numAdvances) >> BigInt(16);
+                }
+            }
+        }
+
+        seed = next(seed, numAdvances);
+                
+    }
+
+    return -1;
+}
+
+/*  Simulate what Dewford trends are created for a given TID seed
+    and return true if it contains the given phrase */
+function checkIfSeedCreatesPhrase(seed, phrase, step){
+    
+    seed = next(seed, step);
+    let bigIntPhrase = [BigInt(phrase[0]), BigInt(phrase[1]), BigInt(phrase[2])];
+
+    for( let i = 0; i < 5; i++ ){
+        let word1 = (next(seed) >> BigInt(16)) % BigInt(69);
+        let check = (next(seed, 2) >> BigInt(16)) & BigInt(1);
+        let word2 = -1;
+        
+        if(check) word2 = (next(seed, 3) >> BigInt(16)) % BigInt(45);
+        else{
+            word2 = (next(seed, 3) >> BigInt(16)) % BigInt(54);
+        }
+
+        let numAdvances = 0;
+        if(((next(seed, 5) >> BigInt(16)) % BigInt(98)) > BigInt(50)){
+            if(((next(seed, 6) >> BigInt(16)) % BigInt(98)) > BigInt(80)) numAdvances = 9;
+            else{
+                numAdvances = 8;
+            }
+        }
+        else{
+            numAdvances = 7;
+        }
+            
+        let checkPhrase = [word1, check, word2];
+        if(bigIntPhrase.every((val, index) => val === checkPhrase[index])){
+            return true;
+        }
+        seed = next(seed, numAdvances);
+    }
+        
+    return false;
+}
+
+// Returns all RNG States where the phrase appears in the correct order and distance after the TID
+function getSeedsFromPhraseAndTID(tid, word1, word2){
+
+    let phrase = getPhraseArrayFromWords(word1, word2);
+
+    let first_word_index = phrase[0];
+    let second_word_from_group_lifestyle = phrase[1];
+    let second_word_index = phrase[2];
+    let seedLists = [];
+    let seedListStep2 = [];
+    let seedListStep3 = [];
+    let seed;
+  
+    for(let i = 0; i < 0x10000; i++){
+        seed = BigInt(BigInt(tid) << BigInt(16)) + BigInt(i);
+        if (checkIfSeedCreatesPhrase(seed, phrase, 2)) seedListStep2.push(seed);
+        if (checkIfSeedCreatesPhrase(seed, phrase, 3)) seedListStep3.push(seed);
+    }
+    seedLists.push(seedListStep2);
+    seedLists.push(seedListStep3);
+    return seedLists;
+}
+
+// Returns all RNG States where the phrase appears in the correct order and distance after the given TID Seed
+function getMatchingSeedsFromPhraseAndSeed(tidseeds, word1, word2, step){
+
+    let phrase = getPhraseArrayFromWords(word1, word2);
+
+    let first_word_index = phrase[0];
+    let second_word_from_group_lifestyle = phrase[1];
+    let second_word_index = phrase[2];
+    let seedList = [];
+    let seed;
+
+    tidseeds.forEach(function(seed){
+       if (checkIfSeedCreatesPhrase(seed, phrase, step)) seedList.push(seed);
+    });
+
+    return seedList;
+}
+
+// Color all the given tiles with the provided color
+function colorTiles(tilesList, color){
+
     context.fillStyle = color;
-    if(tileCoords[0] == 369 && tileCoords[1] == 465){
-        context.fillRect(257, 257, 79, 31);
-        return;
-    }
-    context.fillRect(tileCoords[0], tileCoords[1], 15, 15);
-}
 
-function colorPixelsSplitTwo(tileCoords, color0, color1) {
-    if(tileCoords[0] == 369 && tileCoords[1] == 465){
-        context.fillStyle = "black";
-        context.fillRect(257, 257, 79, 31);
-        for(var i = 0; i < 5; i++){
-            var x = 257 + 16*i;
-            context.fillStyle = color0;
-            context.fillRect(x, 257, 7, 31);
-            context.fillStyle = color1;
-            context.fillRect(x+8, 257, 7, 31);
+    tilesList.forEach((element) => {
+        let tileCoords = tileCoordinates[element];
+        if(tileCoords[0] == 369 && tileCoords[1] == 465){
+            context.fillRect(257, 257, 79, 31);
+            return;
         }
-        context.fillStyle = "black";
-        context.fillRect(257, 272, 79, 1);
-        return;
-    }
-    context.fillStyle = color0;
-    context.fillRect(tileCoords[0], tileCoords[1], 7, 15);
-    context.fillStyle = "black";
-    context.fillRect(tileCoords[0]+7, tileCoords[1], 1, 15);
-    context.fillStyle = color1;
-    context.fillRect(tileCoords[0]+8, tileCoords[1], 7, 15);
-}
-
-function colorPixelsSplitThree(tileCoords, color0, color1, color2) {
-    var bridgeCoords = 257
-    if(tileCoords[0] == 369 && tileCoords[1] == 465){
-        context.fillStyle = "black";
-        context.fillRect(bridgeCoords, bridgeCoords, 79, 31);
-        context.fillStyle = color0;
-        context.fillRect(bridgeCoords, bridgeCoords, 79, 4);
-
-        for(var i = 0; i < 5; i++){
-            context.fillRect(5+bridgeCoords+5*i, 4+bridgeCoords+2*i, 69-(10*i), 2);
-        }
-
-        context.fillStyle = color1;
-        context.fillRect(bridgeCoords, bridgeCoords+16, 38, 15);
-
-        for(var i = 0; i < 5; i++){
-            context.fillRect(bridgeCoords, 6+bridgeCoords+2*i, 5+5*i, 2);
-        }
-
-        context.fillStyle = color2;
-        context.fillRect(bridgeCoords+41, bridgeCoords+16, 38, 15);
-
-        for(var i = 0; i < 5; i++){
-            context.fillRect(bridgeCoords+74-5*i, 6+bridgeCoords+2*i, 5+5*i, 2);
-        }
-        return;
-    }
-
-    context.fillStyle = "black";
-    context.fillRect(tileCoords[0], tileCoords[1], 15, 15);
-    context.fillStyle = color0;
-    context.fillRect(tileCoords[0], tileCoords[1], 15, 2);
-
-    for(var i = 0; i < 5; i++){
-        context.fillRect(1+tileCoords[0]+i, 2+tileCoords[1]+i, 13-(2*i), 1);
-    }
-
-    context.fillStyle = color1;
-    context.fillRect(tileCoords[0], tileCoords[1]+8, 7, 7);
-
-    for(var i = 0; i < 5; i++){
-        context.fillRect(tileCoords[0], 3+tileCoords[1]+i, 1+i, 1);
-    }
-
-    context.fillStyle = color2;
-    context.fillRect(tileCoords[0]+8, tileCoords[1]+8, 7, 7);
-
-    for(var i = 0; i < 5; i++){
-        context.fillRect(tileCoords[0]+14-i, 3+tileCoords[1]+i, 1+i, 1);
-    }
+        context.fillRect(tileCoords[0], tileCoords[1], 15, 15);
+    });
 
 }
 
-function colorTiles(tilesList, color0, color1, color2, overlaps){
-    const canvas = document.getElementById("overlayCanvas");
-    const context = canvas.getContext("2d");
-    switch(Number(overlaps)){
-        case 0:
-            tilesList.forEach((element) => colorPixels(tileCoordinates[element], color0));
-            break;
-        case 1:
-            tilesList.forEach((element) => colorPixelsSplitTwo(tileCoordinates[element], color0, color1));
-            break;
-        case 2:
-            tilesList.forEach((element) => colorPixelsSplitThree(tileCoordinates[element], color0, color1, color2));
-            break;
+function drawResults(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (const resultKey in colorStorage) {
+
+        const color = colorStorage[resultKey];
+        const isInput = $(`#${resultKey} input`).length;
+        const value = isInput
+        ? $(`#${resultKey} input`).val()
+        : $(`#${resultKey}`).text();
+
+        if ($(`#checkboxresult${resultKey}`).is(':checked') && (!isInput || $('#customSeed')[0].validity.valid)) {
+            colorTiles(getFeebasTiles(parseInt("0x" + value, 16)), color);
+        }
     }
 }
 
+function resetResultTable(){
+    customSeed = $('#customSeed')[0].value;
+    customSeedChecked = $('.customBox').is(':checked');
+    $('.resultTable tbody').empty();
+    colorStorage = {};
+    numberOfResults = 0;
+}
+
+// Validate input of all trend input boxes
 function validateInput() {
-    var firstWord = document.getElementById("firstWordInput").value.toUpperCase();
-    var secondWord = document.getElementById("secondWordInput").value.toUpperCase();
-    var tid = document.getElementById("trainerID").value;
 
     var valid = true;
+
+    var tid = document.getElementById("trainerID").value;
 
     if(tid < 0 || tid > 65535){
         valid = false;
     }
 
-    if (!conditions.includes(firstWord)) {
-        document.getElementById("firstWordInput").setCustomValidity("invalid");
-        valid = false;
-    }
-    else{
-        document.getElementById("firstWordInput").setCustomValidity("");
-    }
+    $(".fw").each(function() {
+        var firstWord = $(this).val().toUpperCase();
+        if (!conditions.includes(firstWord)) {
+            $(this)[0].setCustomValidity("invalid");
+            valid = false;
+            $('#calcButton').prop('disabled', true);
+            return valid;
+        }
+        else{
+            $(this)[0].setCustomValidity("");
+            $('#calcButton').prop('disabled', false);
+        }
+    });
 
-    if(!lifestyle.concat(hobbies).includes(secondWord)){
-        document.getElementById("secondWordInput").setCustomValidity("invalid");
-        valid = false;
-    }
-    else{
-        document.getElementById("secondWordInput").setCustomValidity("");
-    }
-
+    $(".sw").each(function() {
+        var secondWord = $(this).val().toUpperCase();
+        if(!lifestyle.concat(hobbies).includes(secondWord)){
+            $(this)[0].setCustomValidity("invalid");
+            valid = false;
+            $('#calcButton').prop('disabled', true);
+        }
+        else{
+            $(this)[0].setCustomValidity("");
+            if(valid){
+                $('#calcButton').prop('disabled', false);
+            }
+        }
+    });
+    
     return valid;
 
+}
+
+function validateCustomSeed() {
+    const value = $("#customSeed").val()
+    const regEx = /^[-+]?[0-9A-Fa-f]+$/;
+    const isHex = regEx.test(value);
+
+    if (isHex) {
+        $('#customSeed')[0].setCustomValidity("");
+    } else {
+        $('#customSeed')[0].setCustomValidity("invalid.");
+    }
+
+}
+
+function createRandomColor(){
+    return '#'+(Math.random()*0xFFFFFF<<0).toString(16).padStart(6, "0");
 }
 
 function calculate() {
@@ -336,54 +442,114 @@ function calculate() {
     }
 
     const context = canvas.getContext('2d');
+
     context.clearRect(0, 0, canvas.width, canvas.height);
-    var is_emerald = document.getElementById("gameOption").value;
+    resetResultTable();
 
-    is_emerald = (is_emerald == 'Emerald') ? 1 : 0;
+    var is_emerald = $(gameOption)[0].value == 'Emerald';
 
-    var tid = document.getElementById("trainerID").value;
+    var tid = $('#trainerID')[0].value;
     var seed = is_emerald ? tid : 0x5a0;
-    var word1 = document.getElementById("firstWordInput").value.toUpperCase();
-    var word2 = document.getElementById("secondWordInput").value.toUpperCase();
-
-    var showResult0 = +document.getElementById("result0Checkbox").checked;
-    var showResult1 = +document.getElementById("result1Checkbox").checked;
-    var showResult2 = +document.getElementById("result2Checkbox").checked;
+    var word1 = $('#firstWordInput')[0].value.toUpperCase();
+    var word2 = $('#secondWordInput')[0].value.toUpperCase();
 
     feeb_rands = getFeebasRands(seed, word1, word2, is_emerald, tid);
 
-    var tiles = [ getFeebasTiles(feeb_rands[0]),
-                getFeebasTiles(feeb_rands[1]),
-                getFeebasTiles(feeb_rands[2])];
+    var tiles = [getFeebasTiles(feeb_rands[0]),
+                 getFeebasTiles(feeb_rands[1]),
+                 getFeebasTiles(feeb_rands[2])];
 
-    overlap01 = [];
-    overlap12 = [];
-    overlap02 = [];
-    overlap012 = [];
+    feeb_rands.forEach(function(result){
+        addResult(result.toString(16).toUpperCase().padStart(4, "0"), createRandomColor());
+    });
 
-    tiles[0].forEach((element) => tiles[1].includes(element) ? overlap01.push(element) : null);
-    tiles[1].forEach((element) => tiles[2].includes(element) ? overlap12.push(element) : null);
-    tiles[0].forEach((element) => tiles[2].includes(element) ? overlap02.push(element) : null);
-    overlap01.forEach((element) => overlap12.includes(element) ? overlap012.push(element) : null);
-
-    if(showResult0) colorTiles(tiles[0], color0, null, null, 0);
-    if(showResult1) colorTiles(tiles[1], color1, null, null, 0);
-    if(showResult2) colorTiles(tiles[2], color2, null, null, 0);
-    if(showResult0 && showResult1) colorTiles(overlap01, color0, color1, null, 1);
-    if(showResult1 && showResult2) colorTiles(overlap12, color1, color2, null, 1);
-    if(showResult0 && showResult2) colorTiles(overlap02, color0, color2, null, 1);
-    if(showResult0 && showResult1 && showResult2) colorTiles(overlap012, color0, color1, color2, 2);
-
-    document.getElementById("result0").innerHTML = feeb_rands[0].toString(16).toUpperCase();
-    document.getElementById("result1").innerHTML = feeb_rands[1].toString(16).toUpperCase();
-    document.getElementById("result2").innerHTML = feeb_rands[2].toString(16).toUpperCase();
+    addCustomResult();
+    drawResults();
 
     generated = true;
 }
 
+function calculateLiveBattery(){
+
+    if(!validateInput()){
+        return;
+    }
+
+    let firstWords = $(".additionalfirstphrases").map(function() {
+        return $(this).val();
+    }).get();
+
+    let secondWords = $(".additionalsecondphrases").map(function() {
+        return $(this).val();
+    }).get();
+
+    let phrasePairs = firstWords.map((first, index) => [first, secondWords[index]]);
+
+    var tid = $('#trainerID')[0].value;
+    var word1 = $('#firstWordInput')[0].value.toUpperCase();
+    var word2 = $('#secondWordInput')[0].value.toUpperCase();
+
+    // get seeds that create the phrase with 2 and 3 RNG calls in between TID and Dewford Trend generation
+    let seedLists = getSeedsFromPhraseAndTID(tid, word1, word2);
+    let seedsStep2 = seedLists[0];
+    let seedsStep3 = seedLists[1];
+
+    let finalResults = [];
+
+    if(phrasePairs.length < 1){
+        seedsStep2.forEach(function(seed){
+            finalResults.push(getFeebasRandFromSeedAndPhrase(seed, word1, word2, 2).toString(16).toUpperCase().padStart(4, "0"));
+        });
+        seedsStep3.forEach(function(seed){
+            finalResults.push(getFeebasRandFromSeedAndPhrase(seed, word1, word2, 3).toString(16).toUpperCase().padStart(4, "0"));
+        });
+    }
+
+    // get all seeds that also create the other Dewford Trends
+    phrasePairs.forEach(function(phrase){
+        seedsStep2 = getMatchingSeedsFromPhraseAndSeed(seedsStep2, phrase[0], phrase[1], 2);
+        seedsStep3 = getMatchingSeedsFromPhraseAndSeed(seedsStep3, phrase[0], phrase[1], 3);
+    });
+
+    seedsStep2.forEach(seed => {
+        finalResults.push(getFeebasRandFromSeedAndPhrase(seed, word1, word2, 2).toString(16).toUpperCase().padStart(4, "0"));
+    });
+    seedsStep3.forEach(seed => {
+        finalResults.push(getFeebasRandFromSeedAndPhrase(seed, word1, word2, 3).toString(16).toUpperCase().padStart(4, "0"));
+    });
+
+    // Eliminate duplicates
+    let uniqueResults = [...new Set(finalResults)];
+
+    resetResultTable();
+    
+    uniqueResults.forEach(function(result){
+        addResult(result, createRandomColor());
+    });
+
+    addCustomResult();
+    drawResults();
+
+    generated = true;
+}
+
+function calculateButton(){
+    var is_emerald = $(gameOption)[0].value == 'Emerald';
+
+    if(is_emerald){
+        calculate();
+    }
+    else if($("#batteryCheckbox").prop("checked")){
+        calculateLiveBattery();
+    }
+    else{
+        calculate();
+    }
+}
+
 function calculate_if_generated(){
     if(generated){
-        calculate();
+        drawResults();
     }
 }
 
@@ -405,9 +571,105 @@ function goToTop() {
     document.documentElement.scrollTop = 0;
 }
 
+// Flag Button
 $(".dropdown-item").on("click",(function(){
     var lang = $(this).attr('id');
     $("#defaultIcon").removeClass($("#defaultIcon").attr('class'));
     $("#defaultIcon").addClass("flag-icon flag-icon-" + lang);
     loadWords(lang);
 }));
+
+/*  Disable the live battery functions if irrelevant and disable the
+    add and remove trend buttons if there is nothing to add or remove */
+function updateOtherTrendsBox() {
+    let batteryIsIrrelevant = !$('#batteryCheckbox').is(':checked') || $(gameOption)[0].value == 'Emerald';
+
+    let disableRemovePhraseBtnState = addedTrendsCount === 0 || batteryIsIrrelevant;
+    let disableAddPhraseBtnState = addedTrendsCount >= maxTrends || batteryIsIrrelevant;
+
+    batteryIsIrrelevant ? $('#otherTrends').addClass('disabled') : $('#otherTrends').removeClass('disabled');
+
+    $('#removePhraseBtn').prop('disabled', disableRemovePhraseBtnState);
+    $('#addPhraseBtn').prop('disabled', disableAddPhraseBtnState);
+
+}
+
+function addPhrase() {
+
+    addedTrendsCount++;
+
+    var newRectangle = `
+        <tr class="addedPhrase">
+            <th>First Word ${addedTrendsCount + 1}</th>
+            <td><input class="fw selection additionalfirstphrases" list="firstWord" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()" value="${conditions[0]}">
+                <datalist id="firstWord"></datalist>
+            </td>
+        </tr>
+        <tr class="addedPhrase">
+            <th>Second Word ${addedTrendsCount + 1}</th>
+            <td><input class="sw selection additionalsecondphrases" list="secondWord" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()" value="${lifestyle[0]}">
+                <datalist id="secondWord"></datalist>
+            </td>
+        </tr>
+    `;
+
+    $('#otherTrends').append(newRectangle);
+    updateOtherTrendsBox();
+
+}
+
+function removePhrase() {
+
+    $('.addedPhrase').slice(-2).remove();
+
+    addedTrendsCount--;
+    updateOtherTrendsBox();
+
+}
+
+function addResult(feebasRand, color) {
+
+    if(numberOfResults < 5){
+        color = firstColors[numberOfResults];
+    }
+    
+    const newIdKey = `result${numberOfResults}`;
+    
+    const newResult = `
+        <tr>
+            <th><input type="checkbox" id="checkbox${newIdKey}" checked onclick="calculate_if_generated()"></th>
+            <th width="75%">Feebas Random Value ${numberOfResults + 1}</th>
+            <th>
+                <div class="square" id="${numberOfResults}_square" style="background-color: ${color};">
+                    <input type="color" class="colorPicker" value="${color}">
+                </div>
+            </th>
+            <td id="${numberOfResults}">${feebasRand}</td>
+        </tr>
+    `;
+
+    $('.resultTable tbody').append(newResult);
+
+    colorStorage[numberOfResults] = color;
+    numberOfResults++;
+}
+
+function addCustomResult(){
+    const newIdKey = `result${numberOfResults}`;
+
+    const checkedAttr = customSeedChecked ? "checked" : "";
+
+    const customResult = `
+        <tr>
+            <th><input class="customBox" type="checkbox" id="checkbox${newIdKey}" onclick="calculate_if_generated()" ${checkedAttr}></th>
+            <th>Custom Feebas Value</div></th>
+            <th><div class="square" id="${numberOfResults}_square" style="background-color: #FFFFFF;"><input type="color" class="colorPicker" value="#FFFFFF" id="colorPicker3"/></div></th>
+            <td id="${numberOfResults}"><input type="text" id="customSeed" name="customSeed" placeholder="FFFF" onkeyup="validateCustomSeed();calculate_if_generated()" maxlength="4" value="${customSeed}"></th>
+        </tr>
+    `;
+
+    $('.resultTable tbody').append(customResult);
+
+    colorStorage[numberOfResults] = "#FFFFFF";
+    numberOfResults++;
+}
