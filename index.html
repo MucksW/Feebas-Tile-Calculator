@@ -12,93 +12,125 @@
 <body>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-        <h1>Feebas Tile Calculator</h1>
-        <p id="disclaimer">
-        <span>The calculated Feebas tiles can only be reliably predicted if the trendy phrase in Dewford City was not changed manually. If you cannot find the words of your trendy phrase in the list, this means that the trend has been changed.</span>
-        <a class="info" >
-            <i class="fa" style="color:#3F00FF">&#xf059;</i>
-            <span><img src="help.png"></span>
-        </a>
-        </p>
+    <div class="row">
 
+        <div class="col-md-6">
+            <h1>Feebas Tile Calculator</h1>
+            <p id="disclaimer">
+            <span>The calculated Feebas tiles can only be reliably predicted if the trendy phrase in Dewford City was not changed manually. If you cannot find the words of your trendy phrase in the list, this means that the trend has been changed.</span>
+            <a class="info" >
+                <i class="fa" style="color:#3F00FF">&#xf059;</i>
+                <span><img src="help.png"></span>
+            </a>
+            </p>
 
-        <table class="inputTable"> 
-            <form id="calculatorForm">
-                <tr>
-                    <th>Game</th>
-                    <td><select id="gameOption" name="gameOption">
-                            <option value="RS">Ruby/Sapphire</option>
-                            <option value="Emerald">Emerald</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Trainer ID</th>
-                    <td><input type="number" id="trainerID" name="trainerID" placeholder="00000" min="0" max="65535"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" ><span style="font-weight:bold;">Dewford Trend</span>
-                        <div class="dropdown">  
-                            <button type="button" class="wrapper" data-toggle="dropdown">  
-                                <a id="defaultIcon" class="flag-icon flag-icon-gb"></a>
-                            </button>  
-                            <div class="dropdown-menu">  
-                                <a id="gb" title="English" class="dropdown-item"><i class="flag-icon flag-icon-gb"></i></a>
-                                <a id="jp" title="Japanese" class="dropdown-item"><i class="flag-icon flag-icon-jp"></i></a>
-                                <a id="fr" title="French" class="dropdown-item"><i class="flag-icon flag-icon-fr"></i></a>
-                                <a id="de" title="German" class="dropdown-item"><i class="flag-icon flag-icon-de"></i></a>
-                                <a id="it" title="Italian" class="dropdown-item"><i class="flag-icon flag-icon-it"></i></a>
-                                <a id="es" title="Spanish" class="dropdown-item"><i class="flag-icon flag-icon-es"></i></a>
-                            </div>  
-                        </div>  
-                    </td>
-                </tr>
-                <tr>
-                    <th>First Word</th>
-                    <td><input class="selection" list="firstWord" id="firstWordInput" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
-                        <datalist id="firstWord"></datalist>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Second Word</th>
-                    <td><input class="selection" list="secondWord" id="secondWordInput" onfocus="this.value='';validateInput()" onchange="this.blur();" onkeyup="validateInput()">
-                        <datalist id="secondWord"></datalist>
-                    </td>
-                </tr>
-            </form>
-        </table>
-        <button type="button" id="calcButton" onclick="calculate()">Calculate</button>
+            <div>
+                <table class="inputTable"> 
+                        <form id="calculatorForm">
+                            <tr>
+                                <th>Game</th>
+                                <td><select id="gameOption" name="gameOption" onchange="updateOtherTrendsBox();">
+                                        <option value="RS">Ruby/Sapphire</option>
+                                        <option value="Emerald">Emerald</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Working Battery <br>
+                                    at New Game
+                                    <a class="info">
+                                    <i class="fa" style="color:#3F00FF">&#xf059;</i>
+                                    <span>The internal battery was working when the save file was created. Its current state does not affect Feebas tiles.</span>
+                                </a></th>
+                                <td><input type="checkbox" id="batteryCheckbox" onchange="updateOtherTrendsBox();">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Trainer ID</th>
+                                <td><input type="number" id="trainerID" name="trainerID" placeholder="00000" min="0" max="65535"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" ><span style="font-weight:bold;"> Today's Dewford Trend</span>
+                                    <div class="dropdown">  
+                                        <button type="button" class="wrapper" data-toggle="dropdown">  
+                                            <a id="defaultIcon" class="flag-icon flag-icon-gb"></a>
+                                        </button>  
+                                        <div class="dropdown-menu">  
+                                            <a id="gb" title="English" class="dropdown-item"><i class="flag-icon flag-icon-gb"></i></a>
+                                            <a id="jp" title="Japanese" class="dropdown-item"><i class="flag-icon flag-icon-jp"></i></a>
+                                            <a id="fr" title="French" class="dropdown-item"><i class="flag-icon flag-icon-fr"></i></a>
+                                            <a id="de" title="German" class="dropdown-item"><i class="flag-icon flag-icon-de"></i></a>
+                                            <a id="it" title="Italian" class="dropdown-item"><i class="flag-icon flag-icon-it"></i></a>
+                                            <a id="es" title="Spanish" class="dropdown-item"><i class="flag-icon flag-icon-es"></i></a>
+                                        </div>  
+                                    </div>  
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>First Word</th>
+                                <td><input class="fw selection" list="firstWord" id="firstWordInput" onfocus="this.value='';validateInput()" onkeyup="validateInput()">
+                                    <datalist id="firstWord"></datalist>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Second Word</th>
+                                <td><input class="sw selection" list="secondWord" id="secondWordInput" onfocus="this.value='';validateInput()" onkeyup="validateInput()">
+                                    <datalist id="secondWord"></datalist>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" ><span style="font-weight:bold;"> Other Dewford Trends</span>
+                                <div class="buttonWrapper">
+                                    <button id="addPhraseBtn" class="btn" type="button" onclick="addPhrase()">+</button>
+                                    <button id="removePhraseBtn" type="button" class="btn btn-danger" onclick="removePhrase()">-</button>
+                                </div>
+                                </td>
+                                
+                            </tr>
+                        </form>
+                    <tbody id="otherTrends">
+                    </tbody>
+                </table>
+            </div>
+            <button type="button" id="calcButton" onclick="calculateButton()">Calculate</button>
 
-        <table  id="resultContainer">
-          <tr>
-              <th><input type="checkbox" id="result0Checkbox" checked onclick="calculate_if_generated()"></th>
-            <th width="75%"> Feebas Random Value</div></th>
-            <th><div id="square0"><input type="color" class="colorPicker" value="#E34234" id="colorPicker0"/></div></th>
-            <td id="result0">0000</th>
-          </tr>
-          <tr>
-              <th><input type="checkbox" id="result1Checkbox" onclick="calculate_if_generated()"></th>
-            <th>First Alternative</div></th>
-            <th><div id="square1"><input type="color" class="colorPicker" value="#FFD700" id="colorPicker1"/></div></th>
-            <td id="result1">0000</th>
-          </tr>
-          <tr>
-              <th><input type="checkbox" id="result2Checkbox" onclick="calculate_if_generated()"></th>
-            <th>Second Alternative</div></th>
-            <th><div id="square2"><input type="color" class="colorPicker" value="#0BDA51" id="colorPicker2"/></div></th>
-            <td id="result2">0000</th>
-          </tr>
-      </table>
+            <table  class="resultTable">
+                <tbody>
+                    <tr>
+                        <th><input type="checkbox" id="checkbox0" checked onclick="calculate_if_generated()"></th>
+                        <th width="75%"> Feebas Random Value 1</div></th>
+                        <th><div class="square" id="square0" style="background-color: #E34234;"><input type="color" class="colorPicker" value="#E34234" id="colorPicker0"/></div></th>
+                        <td id="result0">0000</th>
+                    </tr>
+                    <tr>
+                        <th><input type="checkbox" id="checkbox1" onclick="calculate_if_generated()"></th>
+                        <th>Feebas Random Value 2</div></th>
+                        <th><div class="square" id="square1" style="background-color: #FFD700;"><input type="color" class="colorPicker" value="#FFD700" id="colorPicker1"/></div></th>
+                        <td id="result1">0000</th>
+                    </tr>
+                    <tr>
+                        <th><input type="checkbox" id="checkbox2" onclick="calculate_if_generated()"></th>
+                        <th>Feebas Random Value 3</div></th>
+                        <th><div class="square" id="square2" style="background-color: #0BDA51;"><input type="color" class="colorPicker" value="#0BDA51" id="colorPicker2"/></div></th>
+                        <td id="result2">0000</th>
+                    </tr>
+                    <tr>
+                        <th><input class="customBox" type="checkbox" id="checkbox3" onclick="calculate_if_generated()"></th>
+                        <th>Custom Feebas Value</div></th>
+                        <th><div class="square" id="square3" style="background-color: #FFFFFF;"><input type="color" class="colorPicker" value="#FFFFFF" id="colorPicker3"/></div></th>
+                        <td id="customResult"><input type="text" id="customSeed" name="customSeed" maxlength="4" placeholder="FFFF" onchange="calculate_if_generated()"></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6" id="imageContainer">
+            <p>Image credit: <a href="https://github.com/Bl4ckSh4rk/PKHeXFeebasLocatorPlugin/">Bl4ckSh4rk</a></p>
+            <img src="route119.png" id="routeImage">
+            <canvas id="overlayCanvas" width="641" height="1553"></canvas>
+        </div>
+
     </div>
-    <div class="col-md-6" id="imageContainer">
-        <p>Image credit: <a href="https://github.com/Bl4ckSh4rk/PKHeXFeebasLocatorPlugin/">Bl4ckSh4rk</a></p>
-        <img src="route119.png" id="routeImage">
-        <canvas id="overlayCanvas" width="641" height="1553"></canvas>
-    </div>
-
-  </div>
 </div>
 
 <button id="goToTopBtn" onclick="goToTop()">
