@@ -601,13 +601,13 @@ function addPhrase() {
     var newRectangle = `
         <tr class="addedPhrase">
             <th>First Word ${addedTrendsCount + 1}</th>
-            <td><input class="fw selection additionalfirstphrases" list="firstWord" onfocus="this.value='';validateInput()" onchange="validateInput(); this.blur();" onkeyup="validateInput()" value="${conditions[0]}">
+            <td><input class="fw selection additionalfirstphrases" list="firstWord" onfocus="this.value=''" oninput="validateInput()" onchange="validateInput(); this.blur();" value="${conditions[0]}">
                 <datalist id="firstWord"></datalist>
             </td>
         </tr>
         <tr class="addedPhrase">
             <th>Second Word ${addedTrendsCount + 1}</th>
-            <td><input class="sw selection additionalsecondphrases" list="secondWord" onfocus="this.value='';validateInput()" onchange="validateInput(); this.blur();" onkeyup="validateInput()" value="${lifestyle[0]}">
+            <td><input class="sw selection additionalsecondphrases" list="secondWord" onfocus="this.value=''" oninput="validateInput()" onchange="validateInput(); this.blur();" value="${lifestyle[0]}">
                 <datalist id="secondWord"></datalist>
             </td>
         </tr>
