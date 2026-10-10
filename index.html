@@ -68,13 +68,13 @@
                             </tr>
                             <tr>
                                 <th>First Word</th>
-                                <td><input class="fw selection" list="firstWord" id="firstWordInput" onfocus="this.value='';validateInput()" onkeyup="validateInput()">
+                                <td><input class="fw selection" list="firstWord" id="firstWordInput" onfocus="this.value=''" oninput="validateInput()" onchange="validateInput(); this.blur();">
                                     <datalist id="firstWord"></datalist>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Second Word</th>
-                                <td><input class="sw selection" list="secondWord" id="secondWordInput" onfocus="this.value='';validateInput()" onkeyup="validateInput()">
+                                <td><input class="sw selection" list="secondWord" id="secondWordInput" onfocus="this.value=''" oninput="validateInput()" onchange="validateInput(); this.blur();">
                                     <datalist id="secondWord"></datalist>
                                 </td>
                             </tr>
